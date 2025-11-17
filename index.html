@@ -26,18 +26,20 @@
     <div class="sidebar">
       <h1>Staff non assigné</h1>
       <div class="cardContainer w-full flex justify-center">
-        <div
-          class="staffCard border-2 w-11/12 flex justify-between items-center"
-        >
-          <img class="cardPfp rounded-full border-2 h-full" src="" alt="pfp" />
-          <div>
+        <div class="staffCard w-11/12 flex justify-between items-center">
+          <img
+            class="cardPfp aspect-square rounded-full border-2 h-3/3 w-1/5"
+            src=""
+            alt="pfp"
+          />
+          <div class="w=1/3">
             <h2>Nom:</h2>
             <h2>Role:</h2>
           </div>
-          <img class="w-8 h-10/12" src="images/delete.png" alt="trash" />
+          <img class="w-1/7 h-full" src="images/delete.png" alt="trash" />
         </div>
       </div>
-      <img src="images/add.png" id="addNew" alt="" />
+      <img src="images/add.png" id="addNew" alt="add" />
     </div>
     <!-- Modals -->
     <div class="modalForm">
@@ -59,7 +61,12 @@
         <label for="photo">Photo</label>
 
         <div class="flex justify-between">
-          <input type="url" id="photo" placeholder="https/images.com" />
+          <input
+            type="url"
+            id="photo"
+            placeholder="https/images.com"
+            class="border-2 w-8/12 text-2xl"
+          />
 
           <img id="pfp" src="" alt="pfp" />
         </div>
