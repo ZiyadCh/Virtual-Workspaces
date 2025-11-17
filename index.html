@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Office</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- main -->
+    <div class="office">
+      <img src="brief-bg.jpg" id="imgBg" alt="bg" />
+      <div class="floor">
+        <div class="room conference">Salle de conférence</div>
+        <div class="room reception">Réception</div>
+        <div class="room server">Salle des serveurs</div>
+        <div class="room security">Salle de sécurité</div>
+        <div class="room staff">Salle du personnel</div>
+        <div class="room archive">Salle d'archives</div>
+      </div>
+    </div>
+
+    <!-- sidebar -->
+    <div class="sidebar">
+      <h1>Staff non assigné</h1>
+      <div class="wr"><button id="addNew">+</button></div>
+    </div>
+    <!-- Modals -->
+    <div class="modalForm">
+      <form id="form">
+        <h1>Ajouter nouveau Employant</h1>
+        <label for="nom">Nom</label>
+        <input type="text" name="nom" placeholder="Nom" />
+
+        <label for="role">Rôle</label>
+        <select name="role">
+          <option disabled selected></option>
+          <option>Manager</option>
+          <option>Réceptionniste</option>
+          <option>IT</option>
+          <option>Sécurité</option>
+          <option>Nettoyage</option>
+        </select>
+
+        <label for="photo">Photo</label>
+
+        <div>
+          <input type="url" name="photo" placeholder="https/images.com" />
+
+          <img id="pfp" src="" alt="pfp" />
+        </div>
+
+        <label for="email">Email</label>
+        <input type="email" name="email" placeholder="ex@gmail.com" />
+
+        <label for="telephone">Téléphone</label>
+        <input type="tel" name="telephone" placeholder="XX-XXXX-XXXX" />
+        <label for="experience">Experience(s) Professionel</label>
+        <div class="exp"></div>
+        <div class="wre"><button type="button" class="addExp">+</button></div>
+
+        <div class="wr"><button id="aj" type="submit">Ajouter</button></div>
+      </form>
+    </div>
+  </body>
+</html>
