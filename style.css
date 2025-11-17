@@ -13,7 +13,7 @@ body {
   height: 100%;
 }
 .office {
-  width: 80vw;
+  width: 75vw;
   position: relative;
   aspect-ratio: 16/9;
 }
@@ -74,17 +74,17 @@ body {
 .archive,
 .staff,
 .server {
-  width: 18vw;
+  width: 17vw;
 }
 .conference,
 .reception {
-  width: 31vw;
+  width: 29vw;
 }
 .sidebar {
   background: #eef;
   border-left: #0af 2rem solid;
   height: 100vh;
-  width: 20vw;
+  width: 25vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -99,11 +99,20 @@ body {
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
 }
+.cardContainer {
+  flex-direction: column;
+}
 .staffCard {
   margin-top: 1rem;
   background: #fff;
   padding: 1rem;
   border-radius: 15px;
+  transition: 0.3s;
+  border: solid 1px #99f;
+}
+
+.staffCard:hover {
+  border-bottom: solid 8px #99f;
 }
 #addNew {
   margin-top: 2rem;
@@ -113,6 +122,9 @@ body {
 }
 #addNew:hover {
   transform: scale(0.8);
+}
+.cardDelete {
+  transform: scale(0.5);
 }
 
 /* modal form */
@@ -264,9 +276,10 @@ select {
   }
   .sidebar {
     width: 100vw;
-    height: 30vh;
+    height: 35vh;
     overflow-y: scroll;
   }
+
   #form {
     width: 70vw;
   }
