@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Office</title>
     <script src="script.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -30,7 +31,7 @@
     <div class="modalForm">
       <form id="form">
         <h1>Ajouter nouveau Employant</h1>
-        <label for="nom">Nom</label>
+        <label class="top-3" for="nom">Nom</label>
         <input type="text" name="nom" placeholder="Nom" />
 
         <label for="role">Rôle</label>
@@ -45,7 +46,7 @@
 
         <label for="photo">Photo</label>
 
-        <div>
+        <div class="flex">
           <input type="url" name="photo" placeholder="https/images.com" />
 
           <img id="pfp" src="" alt="pfp" />
