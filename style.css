@@ -28,6 +28,7 @@ body {
 .room {
   background: #fff3;
   display: flex;
+  position: relative;
   justify-content: center;
   align-items: center;
   font-size: 1.25rem;
@@ -80,6 +81,7 @@ body {
 .reception {
   width: 29vw;
 }
+
 .sidebar {
   background: #eef;
   border-left: #0af 2rem solid;
@@ -246,6 +248,133 @@ select {
 }
 .wr:hover::after {
   background-position: 100% 0%;
+}
+/* ROOM AFTER */
+.conference::after {
+  content: "+";
+  color: #fff;
+  font-size: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  transform: scale(0);
+  transform: opacity(0);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #00f;
+  transition: 0.3s;
+}
+.conference:hover::after {
+  transform: scale(1);
+  box-shadow: 0 0 20px #00f;
+}
+.server::after {
+  content: "+";
+  color: #fff;
+  font-size: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  transform: scale(0);
+  transform: opacity(0);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #aaf;
+  transition: 0.3s;
+}
+.server:hover::after {
+  transform: scale(1);
+  box-shadow: 0 0 20px #aaf;
+}
+
+.security::after {
+  content: "+";
+  color: #fff;
+  font-size: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  transform: scale(0);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #f0f;
+  transition: 0.3s;
+}
+.security:hover::after {
+  transform: scale(1);
+  box-shadow: 0 0 20px #f0f;
+}
+
+.archive::after {
+  content: "+";
+  color: #fff;
+  font-size: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  transform: scale(0);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #0ff;
+  transition: 0.3s;
+}
+.archive:hover::after {
+  transform: scale(1);
+  box-shadow: 0 0 20px #0ff;
+}
+
+.staff::after {
+  content: "+";
+  color: #fff;
+  font-size: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  transform: scale(0);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ff0;
+  transition: 0.3s;
+}
+.staff:hover::after {
+  transform: scale(1);
+  box-shadow: 0 0 20px #ff0;
+}
+
+.reception::after {
+  content: "+";
+  color: #fff;
+  font-size: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  transform: scale(0);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #0f0;
+  transition: 0.3s;
+}
+.reception:hover::after {
+  transform: scale(1);
+  box-shadow: 0 0 20px #0f0;
 }
 
 /* animations */
