@@ -12,22 +12,31 @@ form.addEventListener("click", (e) => e.stopPropagation());
 
 addExp.addEventListener("click", () => {
   const exWrap = document.createElement("div");
+  const exForm = document.createElement("form");
   exWrap.style.display = "flex";
-
-  const inEx = document.createElement("input");
+  exForm.innerHTML = `
+<label>Tache:</label>
+<input type="textarea"> 
+<label>Date de commence</label>
+<input type="date"> 
+<label>Date de Finission</label>
+<input type="date">`;
+  exForm.className = "exForm";
 
   const delBtn = document.createElement("button");
-  delBtn.textContent = "X";
-  delBtn.style.background = "transparent";
-  delBtn.style.border = "none";
+  delBtn.innerHTML = `
+  <img
+    class="delExp w-5 h-5 absolute top-4 right-5"
+    src="images/delete.png"
+    alt="trash"
+  />;`;
 
+  exForm.appendChild(delBtn);
   delBtn.addEventListener("click", () => {
     exWrap.remove();
   });
 
-  exWrap.appendChild(delBtn);
-  exWrap.appendChild(inEx);
+  exWrap.appendChild(exForm);
 
   exp.appendChild(exWrap);
 });
-

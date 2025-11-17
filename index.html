@@ -2,7 +2,7 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta id="viewport" content="width=device-width, initial-scale=1" />
     <title>Office</title>
     <script src="script.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -11,7 +11,7 @@
   <body>
     <!-- main -->
     <div class="office">
-      <img src="brief-bg.jpg" id="imgBg" alt="bg" />
+      <img src="images/brief-bg.jpg" id="imgBg" alt="bg" />
       <div class="floor">
         <div class="room conference">Salle de conférence</div>
         <div class="room reception">Réception</div>
@@ -25,17 +25,29 @@
     <!-- sidebar -->
     <div class="sidebar">
       <h1>Staff non assigné</h1>
-      <div class="wr"><button id="addNew">+</button></div>
+      <div class="cardContainer w-full flex justify-center">
+        <div
+          class="staffCard border-2 w-11/12 flex justify-between items-center"
+        >
+          <img class="cardPfp rounded-full border-2 h-full" src="" alt="pfp" />
+          <div>
+            <h2>Nom:</h2>
+            <h2>Role:</h2>
+          </div>
+          <img class="w-8 h-10/12" src="images/delete.png" alt="trash" />
+        </div>
+      </div>
+      <img src="images/add.png" id="addNew" alt="" />
     </div>
     <!-- Modals -->
     <div class="modalForm">
       <form id="form">
         <h1>Ajouter nouveau Employant</h1>
         <label class="top-3" for="nom">Nom</label>
-        <input type="text" name="nom" placeholder="Nom" />
+        <input type="text" id="nom" placeholder="Nom" />
 
         <label for="role">Rôle</label>
-        <select name="role">
+        <select id="role">
           <option disabled selected></option>
           <option>Manager</option>
           <option>Réceptionniste</option>
@@ -46,20 +58,20 @@
 
         <label for="photo">Photo</label>
 
-        <div class="flex">
-          <input type="url" name="photo" placeholder="https/images.com" />
+        <div class="flex justify-between">
+          <input type="url" id="photo" placeholder="https/images.com" />
 
           <img id="pfp" src="" alt="pfp" />
         </div>
 
         <label for="email">Email</label>
-        <input type="email" name="email" placeholder="ex@gmail.com" />
+        <input type="email" id="email" placeholder="ex@gmail.com" />
 
         <label for="telephone">Téléphone</label>
-        <input type="tel" name="telephone" placeholder="XX-XXXX-XXXX" />
+        <input type="tel" id="telephone" placeholder="XX-XXXX-XXXX" />
         <label for="experience">Experience(s) Professionel</label>
+        <button type="button" class="addExp">+</button>
         <div class="exp"></div>
-        <div class="wre"><button type="button" class="addExp">+</button></div>
 
         <div class="wr"><button id="aj" type="submit">Ajouter</button></div>
       </form>
