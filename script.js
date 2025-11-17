@@ -1,4 +1,5 @@
 const addNew = document.getElementById("addNew");
+const cardContainer = document.querySelector(".cardContainer");
 const modalForm = document.querySelector(".modalForm");
 const form = document.getElementById("form");
 const exp = document.querySelector(".exp");
@@ -39,4 +40,32 @@ addExp.addEventListener("click", () => {
   exWrap.appendChild(exForm);
 
   exp.appendChild(exWrap);
+});
+//***********************
+//**********************
+//Ajouter Carte
+const aj = document.getElementById("aj");
+aj.addEventListener("click", (e) => {
+  e.preventDefault();
+  const staffCard = document.createElement("div");
+  staffCard.innerHTML = `
+          <img
+            class="cardPfp aspect-square rounded-full border-2"
+            src=""
+            alt="pfp"
+          />
+          <div class="w-2/3">
+            <h2 class="text-2xl">Nom Complete</h2>
+            <h3>Role</h3>
+          </div>
+          <div
+            class="flex flex-col w-1/12 h-12/12 justify-between items-center"
+          >
+            <img class="cardDelete" src="images/delete.png" alt="trash" />
+            <img src="images/edit.png" class="cardEdit" alt="edit" />
+          </div>
+`;
+  staffCard.className = " staffCard w-11/12 flex justify-between items-center ";
+  //append
+  cardContainer.appendChild(staffCard);
 });

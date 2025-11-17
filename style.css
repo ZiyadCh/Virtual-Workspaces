@@ -160,7 +160,7 @@ body {
   height: 90vh;
   overflow-y: scroll;
   background: #fff;
-  border: #000 solid 0.1875rem;
+  border: #000 solid 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -279,7 +279,7 @@ select {
   transition: 0.3s;
 }
 .conference:hover::after {
-  transform: scale(1);
+  transform: scale(0.2);
   box-shadow: 0 0 20px #00f;
 }
 .server::after {
@@ -300,7 +300,7 @@ select {
   transition: 0.3s;
 }
 .server:hover::after {
-  transform: scale(1);
+  transform: scale(0.2);
   box-shadow: 0 0 20px #aaf;
 }
 
@@ -321,7 +321,7 @@ select {
   transition: 0.3s;
 }
 .security:hover::after {
-  transform: scale(1);
+  transform: scale(0.2);
   box-shadow: 0 0 20px #f0f;
 }
 
@@ -342,7 +342,7 @@ select {
   transition: 0.3s;
 }
 .archive:hover::after {
-  transform: scale(1);
+  transform: scale(0.2);
   box-shadow: 0 0 20px #0ff;
 }
 
@@ -363,7 +363,7 @@ select {
   transition: 0.3s;
 }
 .staff:hover::after {
-  transform: scale(1);
+  transform: scale(0.2);
   box-shadow: 0 0 20px #ff0;
 }
 
@@ -384,7 +384,7 @@ select {
   transition: 0.3s;
 }
 .reception:hover::after {
-  transform: scale(1);
+  transform: scale(0.2);
   box-shadow: 0 0 20px #0f0;
 }
 
