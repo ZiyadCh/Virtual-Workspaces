@@ -211,14 +211,11 @@ select {
   left: 4px;
 }
 .addExp {
-  font-size: 1rem;
-  background: #fff;
-  border: solid black 1px;
-  padding: 0.2rem;
   margin: 0.5rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  font-weight: 800;
+  transition: 0.5s;
+}
+.addExp:hover {
+  transform: translateY(-8px);
 }
 .exForm {
   display: flex;
