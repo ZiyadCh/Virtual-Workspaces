@@ -55,28 +55,41 @@ addExp.addEventListener("click", () => {
 //Ajouter Carte
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  //add to local storage
 
-  const idCard = {
+  const staffInfo = {
     nom: nomInput.value,
     role: roleSelect.value,
     pfp: photoInput.value,
     email: emailInput.value,
     tel: telephoneInput.value,
   };
-  localStorage.setItem("idCard", JSON.stringify(idCard));
+  let staff = JSON.parse(localStorage.getItem("staffinfo")) || [];
+  staff.push(staffInfo);
+  localStorage.setItem("staffinfo", JSON.stringify(staff));
 
   //create the card
+  const staffCard = createCard(staffInfo);
+  //append
+  cardContainer.appendChild(staffCard);
+});
+
+//just the image thing
+photoInput.addEventListener("input", () => {
+  pfpImg.src = photoInput.value;
+});
+
+//create
+function createCard(param) {
   const staffCard = document.createElement("div");
   staffCard.innerHTML = `
           <img
-            class="cardPfp aspect-square rounded-full border-2"
-            src=""
+            class="cardPfp aspect-square rounded-full border-2 w-20 h-20"
+            src="${param.pfp}"
             alt="pfp"
           />
           <div class="w-2/3">
-            <h2 class="text-2xl">Nom Complete</h2>
-            <h3>Role</h3>
+            <h2 class="text-2xl"> ${param.nom} </h2>
+            <h3>${param.role}</h3>
           </div>
           <div
             class="flex flex-col w-1/12 h-12/12 justify-between items-center"
@@ -86,10 +99,13 @@ submitBtn.addEventListener("click", (e) => {
           </div>
 `;
   staffCard.className = " staffCard w-11/12 flex justify-between items-center ";
-  //append
-  cardContainer.appendChild(staffCard);
-});
+  return staffCard;
+}
 
-photoInput.addEventListener("input", () => {
-  pfpImg.src = photoInput.value;
-});
+function loadCard() {
+  const staffInfo = JSON.parse(localStorage.getItem("staffInfo")) || [];
+  staffInfo.forEach((e) => {
+    const staffCard = createCard(e);
+    cardContainer.appendChild(staffCard);
+  });
+}
