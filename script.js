@@ -1,16 +1,23 @@
 const addNew = document.getElementById("addNew");
 const cardContainer = document.querySelector(".cardContainer");
 const modalForm = document.querySelector(".modalForm");
-const form = document.getElementById("form");
 const exp = document.querySelector(".exp");
 const addExp = document.querySelector(".addExp");
+const form = document.getElementById("form");
+const nomInput = document.getElementById("nom");
+const roleSelect = document.getElementById("role");
+const photoInput = document.getElementById("photo");
+const pfpImg = document.getElementById("pfp");
+const emailInput = document.getElementById("email");
+const telephoneInput = document.getElementById("telephone");
+const submitBtn = document.getElementById("aj");
 
 // popup
 addNew.addEventListener("click", () => (modalForm.style.display = "flex"));
 modalForm.addEventListener("click", () => (modalForm.style.display = "none"));
 form.addEventListener("click", (e) => e.stopPropagation());
-//Experience Profesionnel
 
+//Experience Profesionnel
 addExp.addEventListener("click", () => {
   const exWrap = document.createElement("div");
   const exForm = document.createElement("form");
@@ -33,7 +40,8 @@ addExp.addEventListener("click", () => {
   />;`;
 
   exForm.appendChild(delBtn);
-  delBtn.addEventListener("click", () => {
+  delBtn.addEventListener("click", (e) => {
+    e.preventDefault();
     exWrap.remove();
   });
 
@@ -41,11 +49,11 @@ addExp.addEventListener("click", () => {
 
   exp.appendChild(exWrap);
 });
+
 //***********************
 //**********************
 //Ajouter Carte
-const aj = document.getElementById("aj");
-aj.addEventListener("click", (e) => {
+submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
   const staffCard = document.createElement("div");
   staffCard.innerHTML = `
@@ -68,4 +76,8 @@ aj.addEventListener("click", (e) => {
   staffCard.className = " staffCard w-11/12 flex justify-between items-center ";
   //append
   cardContainer.appendChild(staffCard);
+});
+
+photoInput.addEventListener("input", () => {
+  pfpImg.src = photoInput.value;
 });

@@ -13,12 +13,29 @@
     <div class="office">
       <img src="images/brief-bg.jpg" id="imgBg" alt="bg" />
       <div class="floor">
-        <div class="room conference">Salle de conférence</div>
-        <div class="room reception">Réception</div>
-        <div class="room server">Salle des serveurs</div>
-        <div class="room security">Salle de sécurité</div>
-        <div class="room staff">Salle du personnel</div>
-        <div class="room archive">Salle d'archives</div>
+        <div class="room conference">
+          Salle de conférence <button class="addConference">+</button>
+        </div>
+
+        <div class="room reception">
+          Réception <button class="addReception">+</button>
+        </div>
+
+        <div class="room server">
+          Salle des serveurs <button class="addServer">+</button>
+        </div>
+
+        <div class="room security">
+          Salle de sécurité <button class="addSecurity">+</button>
+        </div>
+
+        <div class="room staff">
+          Salle du personnel <button class="addStaff">+</button>
+        </div>
+
+        <div class="room archive">
+          Salle d'archives <button class="addArchive">+</button>
+        </div>
       </div>
     </div>
 
@@ -29,7 +46,7 @@
         <!--Cards -->
         <div class="staffCard w-11/12 flex justify-between items-center">
           <img
-            class="cardPfp aspect-square rounded-full border-2"
+            class="cardPfp aspect-square rounded-full border-2 w-20 h-20"
             src=""
             alt="pfp"
           />
@@ -76,7 +93,7 @@
             class="border-1 border-zinc-300 w-8/12 text-xl"
           />
 
-          <img id="pfp" src="" alt="pfp" />
+          <img id="pfp" src="" alt="pfp" class="w-20 h-20" />
         </div>
 
         <label for="email">Email</label>

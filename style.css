@@ -29,12 +29,15 @@ body {
   cursor: pointer;
   background: #fff3;
   display: flex;
+  flex-direction: column;
   position: relative;
   justify-content: center;
   align-items: center;
   font-size: 1.25rem;
   font-weight: 900;
   width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
 .conference {
@@ -261,133 +264,54 @@ select {
   background-position: 100% 0%;
 }
 /* ROOM AFTER */
-.conference::after {
-  content: "+";
-  color: #fff;
-  font-size: 5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
+
+.room button {
+  font-size: 2rem;
+  font-weight: 900;
+  width: 3rem;
+  height: 3rem;
+  border: none;
+  cursor: pointer;
+  opacity: 0;
   transform: scale(0);
-  transform: opacity(0);
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  transition: 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+/* button on hover */
+.room:hover button {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* room butoon colors */
+.addConference {
   background: #00f;
-  transition: 0.3s;
+  box-shadow: 0 0 20px #00f00;
 }
-.conference:hover::after {
-  transform: scale(0.2);
-  box-shadow: 0 0 20px #00f;
-}
-.server::after {
-  content: "+";
-  color: #fff;
-  font-size: 5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  transform: scale(0);
-  transform: opacity(0);
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: #aaf;
-  transition: 0.3s;
-}
-.server:hover::after {
-  transform: scale(0.2);
-  box-shadow: 0 0 20px #aaf;
-}
-
-.security::after {
-  content: "+";
-  color: #fff;
-  font-size: 5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  transform: scale(0);
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: #f0f;
-  transition: 0.3s;
-}
-.security:hover::after {
-  transform: scale(0.2);
-  box-shadow: 0 0 20px #f0f;
-}
-
-.archive::after {
-  content: "+";
-  color: #fff;
-  font-size: 5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  transform: scale(0);
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: #0ff;
-  transition: 0.3s;
-}
-.archive:hover::after {
-  transform: scale(0.2);
-  box-shadow: 0 0 20px #0ff;
-}
-
-.staff::after {
-  content: "+";
-  color: #fff;
-  font-size: 5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  transform: scale(0);
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: #ff0;
-  transition: 0.3s;
-}
-.staff:hover::after {
-  transform: scale(0.2);
-  box-shadow: 0 0 20px #ff0;
-}
-
-.reception::after {
-  content: "+";
-  color: #fff;
-  font-size: 5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  transform: scale(0);
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+.addReception {
   background: #0f0;
-  transition: 0.3s;
-}
-.reception:hover::after {
-  transform: scale(0.2);
   box-shadow: 0 0 20px #0f0;
 }
-
+.addServer {
+  background: #aaf;
+  box-shadow: 0 0 20px #aaf;
+}
+.addSecurity {
+  background: #f0f;
+  box-shadow: 0 0 20px #f0f;
+}
+.addArchive {
+  background: #0ff;
+  box-shadow: 0 0 20px #0ff;
+}
+.addStaff {
+  background: #ff0;
+  box-shadow: 0 0 20px #ff0;
+}
 /* animations */
 @keyframes appear {
   from {
