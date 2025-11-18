@@ -55,6 +55,18 @@ addExp.addEventListener("click", () => {
 //Ajouter Carte
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
+  //add to local storage
+
+  const idCard = {
+    nom: nomInput.value,
+    role: roleSelect.value,
+    pfp: photoInput.value,
+    email: emailInput.value,
+    tel: telephoneInput.value,
+  };
+  localStorage.setItem("idCard", JSON.stringify(idCard));
+
+  //create the card
   const staffCard = document.createElement("div");
   staffCard.innerHTML = `
           <img
