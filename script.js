@@ -23,6 +23,11 @@ const telInfo = document.querySelector(".telInfo");
 const arExp = document.querySelector(".arExp");
 //
 const receptionGrid = document.querySelector(".receptionGrid");
+const serverGrid = document.querySelector(".serverGrid");
+const archiveGrid = document.querySelector(".archiveGrid");
+const staffGrid = document.querySelector(".staffGrid");
+const conferenceGrid = document.querySelector(".conferenceGrid");
+const securityGrid = document.querySelector(".securityGrid");
 
 //test teception
 receptionGrid.addEventListener("click", (e) => {
@@ -32,8 +37,6 @@ receptionGrid.addEventListener("click", (e) => {
     const staffCard = createCard(e);
     receptionGrid.appendChild(staffCard);
   });
-
-  console.log("dpone");
 });
 
 // popup

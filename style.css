@@ -3,6 +3,9 @@
   margin: 0;
   font-family: "ubuntu";
 }
+::-webkit-scrollbar{
+  display: none;
+}
 body {
   display: flex;
   background: #aaa;
@@ -99,12 +102,10 @@ body {
   transform: scale(0.7);
   width: 100%;
 }
-.receptionGrid .staffCard:nth-child(1) {
-}
 
 .sidebar {
   overflow-y: scroll;
-  background: #eef;
+  background: slateblue;
   border: #000 0.5rem solid;
   height: 100vh;
   width: 25vw;
@@ -146,7 +147,6 @@ body {
   cursor: pointer;
 }
 #addNew:hover {
-  box-shadow: 0 0 20px #0f0;
   transform: scale(0.8);
   transform: rotate(180deg);
 }
