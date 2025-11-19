@@ -20,6 +20,21 @@ const nomInfo = document.querySelector(".nomInfo");
 const roleInfo = document.querySelector(".roleInfo");
 const mailInfo = document.querySelector(".mailInfo");
 const telInfo = document.querySelector(".telInfo");
+//
+const receptionGrid = document.querySelector(".receptionGrid");
+
+//test teception
+receptionGrid.addEventListener("click", (e) => {
+  e.stopPropagation();
+  const staffInfo = JSON.parse(localStorage.getItem("staffInfo")) || [];
+  staffInfo.forEach((e) => {
+    const staffCard = createCard(e);
+    receptionGrid.appendChild(staffCard);
+  });
+
+  console.log("dpone");
+});
+
 // popup
 addNew.addEventListener("click", () => (modalForm.style.display = "flex"));
 modalForm.addEventListener("click", () => (modalForm.style.display = "none"));
@@ -68,18 +83,19 @@ photoInput.addEventListener("input", () => {
 //**********************
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
+
+  const experience = Array.prototype.slice.call(exp);
+  console.log(experience);
   const staffInfo = {
     nom: nomInput.value,
     role: roleSelect.value,
     pfp: photoInput.value,
     email: emailInput.value,
     tel: telephoneInput.value,
-    exp: [],
+    exp: experience,
   };
   //test
 
-  const experience = Array.from(exp);
-  console.log(experience);
   //
 
   let staff = JSON.parse(localStorage.getItem("staffInfo")) || [];

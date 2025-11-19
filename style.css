@@ -86,6 +86,18 @@ body {
 .reception {
   width: 29vw;
 }
+.receptionGrid {
+  position: absolute;
+  display: grid;
+  grid-template-columns: auto auto;
+  width: 100%;
+  height: 50%;
+  overflow-y: scroll;
+}
+.receptionGrid .staffCard {
+  transform: scale(0.7);
+  width: 100%;
+}
 
 .sidebar {
   overflow-y: scroll;
@@ -186,15 +198,17 @@ body {
 }
 #form > input,
 select {
-  width: 60%;
+  width: 80%;
   border: #222 1px solid;
-  border-radius: 25px;
   background: transparent;
-  font-size: 1rem;
+  font-size: 1.5rem;
   text-align: center;
 }
 #form input:focus {
   outline: none;
+}
+#form > label {
+  font-size: 2rem;
 }
 #pfp {
   border-radius: 100%;
