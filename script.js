@@ -1,4 +1,5 @@
 const addNew = document.getElementById("addNew");
+
 const cardContainer = document.querySelector(".cardContainer");
 const modalForm = document.querySelector(".modalForm");
 const exp = document.querySelector(".exp");
@@ -11,6 +12,7 @@ const pfpImg = document.getElementById("pfp");
 const emailInput = document.getElementById("email");
 const telephoneInput = document.getElementById("telephone");
 const submitBtn = document.getElementById("aj");
+const available = document.querySelector(".available");
 
 //
 const modalInfo = document.querySelector(".modalInfo");
@@ -21,6 +23,8 @@ const roleInfo = document.querySelector(".roleInfo");
 const mailInfo = document.querySelector(".mailInfo");
 const telInfo = document.querySelector(".telInfo");
 const arExp = document.querySelector(".arExp");
+const modalCard = document.querySelector(".modalCard");
+
 //
 const receptionGrid = document.querySelector(".receptionGrid");
 const serverGrid = document.querySelector(".serverGrid");
@@ -29,16 +33,8 @@ const staffGrid = document.querySelector(".staffGrid");
 const conferenceGrid = document.querySelector(".conferenceGrid");
 const securityGrid = document.querySelector(".securityGrid");
 
+const staffInfo = JSON.parse(localStorage.getItem("staffInfo")) || [];
 //test teception
-receptionGrid.addEventListener("click", (e) => {
-  e.stopPropagation();
-  const staffInfo = JSON.parse(localStorage.getItem("staffInfo")) || [];
-  staffInfo.forEach((e) => {
-    const staffCard = createCard(e);
-    receptionGrid.appendChild(staffCard);
-  });
-});
-function displayCard(params) {}
 
 // popup
 addNew.addEventListener("click", () => (modalForm.style.display = "flex"));
@@ -82,6 +78,9 @@ addExp.addEventListener("click", () => {
 photoInput.addEventListener("input", () => {
   pfpImg.src = photoInput.value;
 });
+if (photoInput.value == "") {
+  photoInput.value == "https://avatar.iran.liara.run/public/17";
+}
 
 //**********************
 //Ajouter Carte
@@ -97,9 +96,7 @@ submitBtn.addEventListener("click", (e) => {
     }),
   );
  */
-  if (photoInput.value == "") {
-    photoInput.value == "https://avatar.iran.liara.run/public/17";
-  }
+
   const staffInfo = {
     nom: nomInput.value,
     role: roleSelect.value,
@@ -119,6 +116,8 @@ submitBtn.addEventListener("click", (e) => {
   const staffCard = createCard(staffInfo);
   //append
   cardContainer.appendChild(staffCard);
+  const cloneCard = staffCard.cloneNode(true);
+  available.appendChild(cloneCard);
   const cardDelete = document.querySelector(".cardDelete");
 });
 
@@ -157,11 +156,22 @@ function showInfo(param) {
 }
 //load
 function loadCard() {
-  const staffInfo = JSON.parse(localStorage.getItem("staffInfo")) || [];
   staffInfo.forEach((e) => {
     const staffCard = createCard(e);
     cardContainer.appendChild(staffCard);
+    const cloneCard = staffCard.cloneNode(true);
+    available.appendChild(cloneCard);
   });
 }
+//
+
+receptionGrid.addEventListener("click", (e) => {
+  e.stopPropagation();
+  modalCard.style.display = "flex";
+  modalCard.addEventListener("click", () => (modalCard.style.display = "none"));
+  const staffCard = available.querySelectorAll(".staffCard");
+  for (let i = 0; i < staffCard.length; i++) {
+    console.log(staffInfo[i].role);
+  }
+});
 window.addEventListener("DOMContentLoaded", loadCard);
-//del
