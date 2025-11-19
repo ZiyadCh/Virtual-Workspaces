@@ -41,7 +41,6 @@ addExp.addEventListener("click", () => {
   <label>Date de Finission</label>
   <input class="dateE" type="date">`;
   exForm.className = "exForm";
-
   const delBtn = document.createElement("button");
   delBtn.innerHTML = `
   <img
@@ -49,13 +48,11 @@ addExp.addEventListener("click", () => {
     src="images/delete.png"
     alt="trash"
   />;`;
-
   exForm.appendChild(delBtn);
   delBtn.addEventListener("click", (e) => {
     e.preventDefault();
     exWrap.remove();
   });
-
   exWrap.appendChild(exForm);
 
   exp.appendChild(exWrap);
@@ -79,6 +76,12 @@ submitBtn.addEventListener("click", (e) => {
     tel: telephoneInput.value,
     exp: [],
   };
+  //test
+
+  const experience = Array.from(exp);
+  console.log(experience);
+  //
+
   let staff = JSON.parse(localStorage.getItem("staffInfo")) || [];
   staff.push(staffInfo);
   localStorage.setItem("staffInfo", JSON.stringify(staff));
