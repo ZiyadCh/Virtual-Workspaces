@@ -38,6 +38,7 @@ receptionGrid.addEventListener("click", (e) => {
     receptionGrid.appendChild(staffCard);
   });
 });
+function displayCard(params) {}
 
 // popup
 addNew.addEventListener("click", () => (modalForm.style.display = "flex"));
@@ -96,6 +97,9 @@ submitBtn.addEventListener("click", (e) => {
     }),
   );
  */
+  if (photoInput.value == "") {
+    photoInput.value == "https://avatar.iran.liara.run/public/17";
+  }
   const staffInfo = {
     nom: nomInput.value,
     role: roleSelect.value,
