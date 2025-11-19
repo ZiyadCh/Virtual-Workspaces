@@ -90,6 +90,7 @@ body {
   position: absolute;
   display: grid;
   grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
   width: 100%;
   height: 50%;
   overflow-y: scroll;
@@ -97,6 +98,8 @@ body {
 .receptionGrid .staffCard {
   transform: scale(0.7);
   width: 100%;
+}
+.receptionGrid .staffCard:nth-child(1) {
 }
 
 .sidebar {
@@ -219,7 +222,7 @@ select {
 #aj {
   font-size: 1rem;
   padding: 0.5rem;
-  background: #fff;
+  background: orange;
   border: solid black 1px;
   position: relative;
   z-index: 3;
@@ -285,7 +288,7 @@ select {
   padding-bottom: 2rem;
   position: relative;
   animation: appear 1s;
-  overflow: hidden;
+  overflow: scroll;
 }
 .infoMain {
   background: #eee;

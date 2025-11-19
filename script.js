@@ -20,6 +20,7 @@ const nomInfo = document.querySelector(".nomInfo");
 const roleInfo = document.querySelector(".roleInfo");
 const mailInfo = document.querySelector(".mailInfo");
 const telInfo = document.querySelector(".telInfo");
+const arExp = document.querySelector(".arExp");
 //
 const receptionGrid = document.querySelector(".receptionGrid");
 
@@ -62,7 +63,7 @@ addExp.addEventListener("click", () => {
     class="delExp w-5 h-5 absolute top-4 right-5"
     src="images/delete.png"
     alt="trash"
-  />;`;
+  />`;
   exForm.appendChild(delBtn);
   delBtn.addEventListener("click", (e) => {
     e.preventDefault();
@@ -84,8 +85,14 @@ photoInput.addEventListener("input", () => {
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
 
-  const experience = Array.prototype.slice.call(exp);
-  console.log(experience);
+  const experience = Array.from(document.querySelectorAll(".exForm")).map(
+    (form) => ({
+      tache: form.querySelector(".tache").value,
+      dateS: form.querySelector(".dateS").value,
+      dateE: form.querySelector(".dateE").value,
+    }),
+  );
+
   const staffInfo = {
     nom: nomInput.value,
     role: roleSelect.value,
@@ -140,6 +147,23 @@ function showInfo(param) {
   mailInfo.textContent = param.email;
   telInfo.textContent = param.tel;
   pfpInfo.src = param.pfp;
+  param.exp.forEach((e) => {
+    const exWrap = document.createElement("div");
+    const exForm = document.createElement("form");
+    exWrap.style.display = "flex";
+    exForm.innerHTML = `
+  <label>Tache:</label>
+  <label>${e.tache}</label>
+  <label>Date de commence</label>
+  <label>${e.dateS}</label>
+  <label>Date de Finission</label>
+  <label>${e.dateF}</label>`;
+
+    exForm.className = "exForm";
+    exWrap.appendChild(exForm);
+
+    arExp.appendChild(exWrap);
+  });
   modalInfo.style.display = "flex";
 }
 //load
