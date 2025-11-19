@@ -84,7 +84,7 @@ photoInput.addEventListener("input", () => {
 //**********************
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
-
+  /* 
   const experience = Array.from(document.querySelectorAll(".exForm")).map(
     (form) => ({
       tache: form.querySelector(".tache").value,
@@ -92,14 +92,14 @@ submitBtn.addEventListener("click", (e) => {
       dateE: form.querySelector(".dateE").value,
     }),
   );
-
+ */
   const staffInfo = {
     nom: nomInput.value,
     role: roleSelect.value,
     pfp: photoInput.value,
     email: emailInput.value,
     tel: telephoneInput.value,
-    exp: experience,
+    //exp: experience,
   };
   //test
 
@@ -108,7 +108,6 @@ submitBtn.addEventListener("click", (e) => {
   let staff = JSON.parse(localStorage.getItem("staffInfo")) || [];
   staff.push(staffInfo);
   localStorage.setItem("staffInfo", JSON.stringify(staff));
-
   //create the card
   const staffCard = createCard(staffInfo);
   //append
@@ -147,23 +146,6 @@ function showInfo(param) {
   mailInfo.textContent = param.email;
   telInfo.textContent = param.tel;
   pfpInfo.src = param.pfp;
-  param.exp.forEach((e) => {
-    const exWrap = document.createElement("div");
-    const exForm = document.createElement("form");
-    exWrap.style.display = "flex";
-    exForm.innerHTML = `
-  <label>Tache:</label>
-  <label>${e.tache}</label>
-  <label>Date de commence</label>
-  <label>${e.dateS}</label>
-  <label>Date de Finission</label>
-  <label>${e.dateF}</label>`;
-
-    exForm.className = "exForm";
-    exWrap.appendChild(exForm);
-
-    arExp.appendChild(exWrap);
-  });
   modalInfo.style.display = "flex";
 }
 //load
