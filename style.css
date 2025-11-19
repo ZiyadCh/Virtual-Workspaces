@@ -246,6 +246,45 @@ select {
   grid-template-columns: 1fr;
   gap: 10px;
 }
+/* staff info */
+.modalInfo {
+  display: none;
+  background: #0095;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+}
+.infoContainer {
+  width: 18vw;
+  height: 60vh;
+  background: #fff;
+  border: #000 solid 0.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 2rem;
+  position: relative;
+  animation: appear 1s;
+  overflow: hidden;
+}
+.infoMain {
+  background: #eee;
+  border: 2px solid #ddd;
+  border-radius: 25px;
+  width: 95%;
+  padding: 0.3rem;
+  display: grid;
+  grid-template-columns: auto auto;
+}
+.infoMain > h3,
+label {
+  font-size: 1rem;
+}
 /* wr */
 .wr {
   position: relative;

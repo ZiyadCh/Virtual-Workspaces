@@ -12,10 +12,21 @@ const emailInput = document.getElementById("email");
 const telephoneInput = document.getElementById("telephone");
 const submitBtn = document.getElementById("aj");
 
+//
+const modalInfo = document.querySelector(".modalInfo");
+const infoContainer = document.querySelector(".infoContainer");
+const pfpInfo = document.querySelector(".pfpInfo");
+const nomInfo = document.querySelector(".nomInfo");
+const roleInfo = document.querySelector(".roleInfo");
+const mailInfo = document.querySelector(".mailInfo");
+const telInfo = document.querySelector(".telInfo");
 // popup
 addNew.addEventListener("click", () => (modalForm.style.display = "flex"));
 modalForm.addEventListener("click", () => (modalForm.style.display = "none"));
 form.addEventListener("click", (e) => e.stopPropagation());
+
+modalInfo.addEventListener("click", () => (modalInfo.style.display = "none"));
+infoContainer.addEventListener("click", (e) => e.stopPropagation());
 
 //Experience Profesionnel
 addExp.addEventListener("click", () => {
@@ -49,13 +60,17 @@ addExp.addEventListener("click", () => {
 
   exp.appendChild(exWrap);
 });
+//
+//just the image thing
+photoInput.addEventListener("input", () => {
+  pfpImg.src = photoInput.value;
+});
 
-//***********************
 //**********************
 //Ajouter Carte
+//**********************
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
-
   const staffInfo = {
     nom: nomInput.value,
     role: roleSelect.value,
@@ -71,11 +86,7 @@ submitBtn.addEventListener("click", (e) => {
   const staffCard = createCard(staffInfo);
   //append
   cardContainer.appendChild(staffCard);
-});
-
-//just the image thing
-photoInput.addEventListener("input", () => {
-  pfpImg.src = photoInput.value;
+  const cardDelete = document.querySelector(".cardDelete");
 });
 
 //create
@@ -99,9 +110,19 @@ function createCard(param) {
           </div>
 `;
   staffCard.className = " staffCard w-11/12 flex justify-between items-center ";
+  staffCard.addEventListener("click", () => showInfo(param));
   return staffCard;
 }
-
+//showinfo
+function showInfo(param) {
+  nomInfo.textContent = param.nom;
+  roleInfo.textContent = param.role;
+  mailInfo.textContent = param.email;
+  telInfo.textContent = param.tel;
+  pfpInfo.src = param.pfp;
+  modalInfo.style.display = "flex";
+}
+//load
 function loadCard() {
   const staffInfo = JSON.parse(localStorage.getItem("staffInfo")) || [];
   staffInfo.forEach((e) => {
@@ -110,3 +131,4 @@ function loadCard() {
   });
 }
 window.addEventListener("DOMContentLoaded", loadCard);
+//del
