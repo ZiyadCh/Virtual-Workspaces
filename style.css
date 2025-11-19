@@ -3,7 +3,7 @@
   margin: 0;
   font-family: "ubuntu";
 }
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   display: none;
 }
 body {
@@ -89,7 +89,7 @@ body {
 .reception {
   width: 29vw;
 }
-.receptionGrid {
+.gGrid {
   position: absolute;
   display: grid;
   grid-template-columns: auto auto;
@@ -98,7 +98,7 @@ body {
   height: 50%;
   overflow-y: scroll;
 }
-.receptionGrid .staffCard {
+.gGrid .staffCard {
   transform: scale(0.7);
   width: 100%;
 }
@@ -114,7 +114,7 @@ body {
   align-items: center;
   position: relative;
 }
-.available{
+.available {
   overflow-y: scroll;
   background: slateblue;
   border: #000 0.5rem solid;
@@ -124,7 +124,6 @@ body {
   flex-direction: column;
   align-items: center;
   position: relative;
-
 }
 .sidebar h1 {
   font-size: 1.75rem;
@@ -316,8 +315,8 @@ label {
   font-size: 1rem;
 }
 /* CardModal */
-.modalCard{
-   display: none;
+.modalCard {
+  display: none;
   background: #0095;
   width: 100vw;
   height: 100vh;

@@ -79,7 +79,7 @@ photoInput.addEventListener("input", () => {
   pfpImg.src = photoInput.value;
 });
 if (photoInput.value == "") {
-  photoInput.value == "https://avatar.iran.liara.run/public/17";
+  photoInput.value = "https://avatar.iran.liara.run/public/17";
 }
 
 //**********************
@@ -97,7 +97,7 @@ submitBtn.addEventListener("click", (e) => {
   );
  */
 
-  const staffInfo = {
+  const info = {
     nom: nomInput.value,
     role: roleSelect.value,
     pfp: photoInput.value,
@@ -110,10 +110,10 @@ submitBtn.addEventListener("click", (e) => {
   //
 
   let staff = JSON.parse(localStorage.getItem("staffInfo")) || [];
-  staff.push(staffInfo);
+  staff.push(info);
   localStorage.setItem("staffInfo", JSON.stringify(staff));
   //create the card
-  const staffCard = createCard(staffInfo);
+  const staffCard = createCard(info);
   //append
   cardContainer.appendChild(staffCard);
   const cloneCard = staffCard.cloneNode(true);
@@ -160,6 +160,11 @@ function loadCard() {
     const staffCard = createCard(e);
     cardContainer.appendChild(staffCard);
     const cloneCard = staffCard.cloneNode(true);
+    cloneCard.addEventListener("click", (e) => {
+      e.stopPropagation();
+      receptionGrid.appendChild(cloneCard);
+    });
+    //Evenet listener for card
     available.appendChild(cloneCard);
   });
 }
@@ -170,8 +175,25 @@ receptionGrid.addEventListener("click", (e) => {
   modalCard.style.display = "flex";
   modalCard.addEventListener("click", () => (modalCard.style.display = "none"));
   const staffCard = available.querySelectorAll(".staffCard");
-  for (let i = 0; i < staffCard.length; i++) {
-    console.log(staffInfo[i].role);
+  for (let i = 0; i < staffInfo.length; i++) {
+    staffCard[i].addEventListener("click", (e) => {
+      e.stopPropagation();
+      receptionGrid.appendChild(staffCard[i]);
+    });
   }
 });
+
+serverGrid.addEventListener("click", (e) => {
+  e.stopPropagation();
+  modalCard.style.display = "flex";
+  modalCard.addEventListener("click", () => (modalCard.style.display = "none"));
+  const staffCard = available.querySelectorAll(".staffCard");
+  for (let i = 0; i < staffInfo.length; i++) {
+    staffCard[i].addEventListener("click", (e) => {
+      e.stopPropagation();
+      serverGrid.appendChild(staffCard[i]);
+    });
+  }
+});
+
 window.addEventListener("DOMContentLoaded", loadCard);
