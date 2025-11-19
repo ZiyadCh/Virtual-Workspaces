@@ -63,9 +63,9 @@ submitBtn.addEventListener("click", (e) => {
     email: emailInput.value,
     tel: telephoneInput.value,
   };
-  let staff = JSON.parse(localStorage.getItem("staffinfo")) || [];
+  let staff = JSON.parse(localStorage.getItem("staffInfo")) || [];
   staff.push(staffInfo);
-  localStorage.setItem("staffinfo", JSON.stringify(staff));
+  localStorage.setItem("staffInfo", JSON.stringify(staff));
 
   //create the card
   const staffCard = createCard(staffInfo);
@@ -109,3 +109,4 @@ function loadCard() {
     cardContainer.appendChild(staffCard);
   });
 }
+window.addEventListener("DOMContentLoaded", loadCard);
