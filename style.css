@@ -26,6 +26,7 @@ body {
 }
 
 .room {
+  border: 0.5rem solid #000;
   cursor: pointer;
   background: #fff3;
   display: flex;

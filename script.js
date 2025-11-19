@@ -34,12 +34,12 @@ addExp.addEventListener("click", () => {
   const exForm = document.createElement("form");
   exWrap.style.display = "flex";
   exForm.innerHTML = `
-<label>Tache:</label>
-<input type="textarea"> 
-<label>Date de commence</label>
-<input type="date"> 
-<label>Date de Finission</label>
-<input type="date">`;
+  <label>Tache:</label>
+  <input class="tache" type="text"> 
+  <label>Date de commence</label>
+  <input class="dateS" type="date"> 
+  <label>Date de Finission</label>
+  <input class="dateE" type="date">`;
   exForm.className = "exForm";
 
   const delBtn = document.createElement("button");
@@ -77,6 +77,7 @@ submitBtn.addEventListener("click", (e) => {
     pfp: photoInput.value,
     email: emailInput.value,
     tel: telephoneInput.value,
+    exp: [],
   };
   let staff = JSON.parse(localStorage.getItem("staffInfo")) || [];
   staff.push(staffInfo);
