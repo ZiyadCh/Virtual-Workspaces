@@ -87,7 +87,7 @@ if (photoInput.value == "") {
 //**********************
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  /* 
+
   const experience = Array.from(document.querySelectorAll(".exForm")).map(
     (form) => ({
       tache: form.querySelector(".tache").value,
@@ -95,7 +95,6 @@ submitBtn.addEventListener("click", (e) => {
       dateE: form.querySelector(".dateE").value,
     }),
   );
- */
 
   const info = {
     nom: nomInput.value,
@@ -103,7 +102,7 @@ submitBtn.addEventListener("click", (e) => {
     pfp: photoInput.value,
     email: emailInput.value,
     tel: telephoneInput.value,
-    //exp: experience,
+    exp: experience,
   };
   //test
 
@@ -152,6 +151,22 @@ function showInfo(param) {
   mailInfo.textContent = param.email;
   telInfo.textContent = param.tel;
   pfpInfo.src = param.pfp;
+
+  if (param.exp.length > 0) {
+    param.exp.forEach((e) => {
+      const div = document.createElement("div");
+      div.innerHTML = `
+        <p><strong>Tâche:</strong> ${e.tache}</p>
+        <p><strong>Début:</strong> ${e.dateS}</p>
+        <p><strong>Fin:</strong> ${e.dateE}</p>
+        <hr>
+      `;
+      arExp.appendChild(div);
+    });
+  } else {
+    arExp.innerHTML = "<p>Aucune expérience enregistrée.</p>";
+  }
+
   modalInfo.style.display = "flex";
 }
 //load
@@ -170,30 +185,46 @@ function loadCard() {
 }
 //
 
+function assign(room, roleName) {
+  modalCard.addEventListener("click", () => (modalCard.style.display = "none"));
+  cardContainer.innerHTML = "";
+  staffInfo.forEach((info) => {
+    if (info.role === roleName || info.role === "Manager") {
+      const card = createCard(info);
+      cardContainer.appendChild(card);
+
+      card.addEventListener("click", (e) => {
+        e.stopPropagation();
+        room.appendChild(card);
+        modalCard.style.display = "none";
+      });
+    }
+  });
+}
+
 receptionGrid.addEventListener("click", (e) => {
   e.stopPropagation();
-  modalCard.style.display = "flex";
-  modalCard.addEventListener("click", () => (modalCard.style.display = "none"));
-  const staffCard = available.querySelectorAll(".staffCard");
-  for (let i = 0; i < staffInfo.length; i++) {
-    staffCard[i].addEventListener("click", (e) => {
-      e.stopPropagation();
-      receptionGrid.appendChild(staffCard[i]);
-    });
-  }
+  assign(receptionGrid, "Réceptionniste");
 });
 
 serverGrid.addEventListener("click", (e) => {
   e.stopPropagation();
-  modalCard.style.display = "flex";
-  modalCard.addEventListener("click", () => (modalCard.style.display = "none"));
-  const staffCard = available.querySelectorAll(".staffCard");
-  for (let i = 0; i < staffInfo.length; i++) {
-    staffCard[i].addEventListener("click", (e) => {
-      e.stopPropagation();
-      serverGrid.appendChild(staffCard[i]);
-    });
-  }
+  assign(serverGrid, "IT");
+});
+
+staffGrid.addEventListener("click", (e) => {
+  e.stopPropagation();
+  assign(staffGrid, "Manager");
+});
+
+securityGrid.addEventListener("click", (e) => {
+  e.stopPropagation();
+  assign(securityGrid, "Sécurité");
+});
+
+archiveGrid.addEventListener("click", (e) => {
+  e.stopPropagation();
+  assign(archiveGrid, "Manager");
 });
 
 window.addEventListener("DOMContentLoaded", loadCard);
