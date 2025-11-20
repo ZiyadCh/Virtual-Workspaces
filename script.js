@@ -12,6 +12,7 @@ const photoInput = document.getElementById("photo");
 const pfpImg = document.getElementById("pfp");
 const emailInput = document.getElementById("email");
 const telephoneInput = document.getElementById("telephone");
+const addresInput = document.getElementById("addrese");
 const submitBtn = document.getElementById("aj");
 //
 const modalInfo = document.querySelector(".modalInfo");
@@ -99,6 +100,7 @@ submitBtn.addEventListener("click", (e) => {
     pfp: photoInput.value,
     email: emailInput.value,
     tel: telephoneInput.value,
+    add: addresInput.value,
     exp: experience,
   };
   //test
