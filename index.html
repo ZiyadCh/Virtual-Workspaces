@@ -1,132 +1,152 @@
-
 <!doctype html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta id="viewport" content="width=device-width, initial-scale=1" />
-    <title>Office</title>
-    <script src="script.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <!-- main -->
-    <main class="office">
-      <img src="images/brief-bg.jpg" id="imgBg" alt="bg" />
-      <div class="floor">
-        <div class="room conference">
-          <div class="conferenceGrid gGrid" ></div>
-          Salle de conférence <button class="addConference">+</button>
-        </div>
 
-        <div class="room reception">
-          Réception <button class="addReception">+</button>
-          <div class="receptionGrid gGrid">
-            
-          </div>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta id="viewport" content="width=device-width, initial-scale=1" />
+  <title>Office</title>
+  <script src="script.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
 
-        <div class="room server">
-          <div class="serverGrid gGrid" ></div>
-          Salle des serveurs <button class="addServer">+</button>
-        </div>
+<body>
+  <!-- main -->
+  <main class="office">
+    <img src="images/brief-bg.jpg" id="imgBg" alt="bg" />
 
-        <div class="room security">
-          <div class="securityGrid gGrid" ></div>
-          Salle de sécurité <button class="addSecurity">+</button>
-        </div>
-
-        <div class="room staff">
-          <div class="staffGrid gGrid" ></div>
-          Salle du personnel <button class="addStaff">+</button>
-        </div>
-
-        <div class="room archive">
-          <div class="archiveGrid gGrid" ></div>
-          Salle d'archives <button class="addArchive">+</button>
-        </div>
-      </div>
-    </main>
-
-    <!-- sidebar -->
-    <div class="sidebar">
-      <h1>Staff non assigné</h1>
-      <div class="cardContainer w-full flex justify-center items-center">
-        <!--Cards -->
-
-        <!--Cards -->
+    <div class="floor">
+      <div class="room conference">
+        <div class="conferenceGrid gGrid"></div>
+        <h1>Salle de conférence
+           <button class="addConference">+</button>
+        </h1>
+       
       </div>
 
-      <img src="images/add.png" id="addNew" alt="add" />
-    </div>
-    <!-- Modals -->
-    <div class="modalForm">
-      <form id="form">
-        <h1>Ajouter nouveau Employant</h1>
-        <label class="top-3" for="nom">Nom</label>
-        <input type="text" id="nom" placeholder="Nom" />
+      <div class="room reception">
+        <h1>Réception
+          <button class="addReception">+</button>
 
-        <label for="role">Rôle</label>
-        <select id="role">
-          <option disabled selected></option>
-          <option>Manager</option>
-          <option>Réceptionniste</option>
-          <option>IT</option>
-          <option>Sécurité</option>
-          <option>Nettoyage</option>
-        </select>
+        </h1>
+        <div class="receptionGrid gGrid"></div>
+      </div>
 
-        <label for="photo">Photo</label>
+      <div class="room server">
+        <div class="serverGrid gGrid"></div>
+        <h1>Salle des serveurs
+          <button class="addServer">+</button>
+        </h1>
 
-        <div class="flex justify-between">
-          <input
-            type="url"
-            id="photo"
-            placeholder="https/images.com"
-            class="border-1 border-zinc-300 w-8/12 text-xl"
-          />
+      </div>
 
-          <img id="pfp" src="https://avatar.iran.liara.run/public/17" alt="pfp" class="w-20 h-20" />
-        </div>
+      <div class="room security">
+        <div class="securityGrid gGrid"></div>
+        <h1>Salle de sécurité
+            <button class="addSecurity">+</button>
+        </h1>
+      
+      </div>
 
-        <label for="email">Email</label>
-        <input type="email" id="email" placeholder="ex@gmail.com" />
+      <div class="room staff">
+        <div class="staffGrid gGrid"></div>
+        <h1>Salle du personnel
+              <button class="addStaff">+</button>
+        </h1>
+    
+      </div>
 
-        <label for="telephone">Téléphone</label>
-        <input type="tel" id="telephone" placeholder="XX-XXXX-XXXX" />
-        <label for="experience">Experience(s) Professionel</label>
-        <button type="button" class="addExp">
-          <img src="images/addExp.png" alt="" />
-        </button>
-        <div class="exp"></div>
-        <div class="exWrap">
-          
-        </div>
-        <div class="wr"><button id="aj" type="submit">Ajouter</button></div>
-      </form>
-    </div>
-    <div class="modalInfo">
-      <div class="infoContainer">
-        <img class="pfpInfo border-1  w-full h-4/8 text-xl" src="" alt="pfp" />
-        <h2><strong>Info</strong></h2>
-        <article class="infoMain">
-          <h3><strong>Nom:</strong></h3>
-              <label class="nomInfo">efewq</label>
-          <h3><strong>Rôle:</strong><h3>
-              <label class="roleInfo">efw</label>
-          <h3><strong>Email:</strong><h3>
-              <label class="mailInfo">feef</label>
-          <h3><strong>Numer Telephone:</strong></h3>
-              <label class="telInfo">fef</label>
-        </article >
-        <h2><strong>Experience Professionel</strong></h2>
-
-        <article class="arExp">
-        </article>
+      <div class="room archive">
+        <div class="archiveGrid gGrid"></div>
+        <h1>Salle d'archives
+              <button class="addArchive">+</button>
+        </h1>
+    
       </div>
     </div>
-    <div class="modalCard" >
-        <div class="available gGrid"></div>
+  </main>
+
+  <!-- sidebar -->
+  <div class="sidebar">
+    <h1>Staff non assigné</h1>
+    <div class="cardContainer w-full flex justify-center items-center">
+      <!--Cards -->
+
+      <!--Cards -->
     </div>
-  </body>
+
+    <img src="images/add.png" id="addNew" alt="add" />
+  </div>
+  <!-- Modals -->
+  <div class="modalForm">
+    <form id="form">
+      <h1>Ajouter nouveau Employant</h1>
+      <label class="top-3" for="nom">Nom</label>
+      <input type="text" id="nom" placeholder="Nom" />
+
+      <label for="role">Rôle</label>
+      <select id="role">
+        <option disabled selected></option>
+        <option>Manager</option>
+        <option>Réceptionniste</option>
+        <option>IT</option>
+        <option>Sécurité</option>
+        <option>Nettoyage</option>
+      </select>
+
+      <label for="photo">Photo</label>
+
+      <div class="flex justify-between">
+        <input type="url" id="photo" placeholder="https/images.com" class="border-1 border-zinc-300 w-8/12 text-xl" />
+
+        <img id="pfp" src="https://avatar.iran.liara.run/public/17" alt="pfp" class="w-20 h-20" />
+      </div>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="ex@gmail.com" />
+
+      <label for="telephone">Téléphone</label>
+      <input type="tel" id="telephone" placeholder="XX-XXXX-XXXX" />
+
+      <label for="telephone">Addresse Actuelle</label>
+      <input type="text" id="addrese" placeholder="-----" />
+
+      <label for="experience">Experience(s) Professionel</label>
+      <button type="button" class="addExp">
+        <img src="images/addExp.png" alt="" />
+      </button>
+      <div class="exp"></div>
+      <div class="exWrap">
+
+      </div>
+      <div class="wr"><button id="aj" type="submit">Ajouter</button></div>
+    </form>
+  </div>
+  <div class="modalInfo">
+    <div class="infoContainer">
+      <img class="pfpInfo border-1  w-full h-4/8 text-xl" src="" alt="pfp" />
+      <h2><strong>Info</strong></h2>
+      <article class="infoMain">
+        <h3><strong>Nom:</strong></h3>
+        <label class="nomInfo">efewq</label>
+        <h3><strong>Rôle:</strong>
+          <h3>
+            <label class="roleInfo">efw</label>
+            <h3><strong>Email:</strong>
+              <h3>
+                <label class="mailInfo">feef</label>
+                <h3><strong>Numer Telephone:</strong></h3>
+                <label class="telInfo">fef</label>
+      </article>
+      <h2><strong>Experience Professionel</strong></h2>
+
+      <article class="arExp">
+      </article>
+    </div>
+  </div>
+  <div class="modalCard">
+    <div class="available gGrid"></div>
+  </div>
+</body>
+
 </html>

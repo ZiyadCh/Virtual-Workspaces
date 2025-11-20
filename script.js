@@ -1,3 +1,4 @@
+
 const addNew = document.getElementById("addNew");
 
 const cardContainer = document.querySelector(".cardContainer");
@@ -119,8 +120,9 @@ submitBtn.addEventListener("click", (e) => {
   available.appendChild(cloneCard);
   const cardDelete = document.querySelector(".cardDelete");
 });
-
 //create
+
+  const infoCard = document.querySelector(".infoCard");
 function createCard(param) {
   const staffCard = document.createElement("div");
   staffCard.innerHTML = `
@@ -137,11 +139,15 @@ function createCard(param) {
             class="flex flex-col w-1/12 h-12/12 justify-between items-center"
           >
             <img class="cardDelete" src="images/delete.png" alt="trash" />
-            <img src="images/edit.png" class="cardEdit" alt="edit" />
+            <img src="images/info.png" class="infoCard" alt="info" />
           </div>
 `;
+  
+  infoCard.addEventListener("click",(e)=>{
+    e.stopPropagation();
+    showInfo(param);
+  });
   staffCard.className = " staffCard w-11/12 flex justify-between items-center ";
-  staffCard.addEventListener("click", () => showInfo(param));
   return staffCard;
 }
 //showinfo
@@ -188,20 +194,22 @@ function loadCard() {
 function assign(room, roleName) {
   modalCard.addEventListener("click", () => (modalCard.style.display = "none"));
   const filterInfo = JSON.parse(localStorage.getItem("staffInfo"));
-  localStorage.setItem("filterInfo",JSON.stringify(filterInfo))
-  cardContainer.innerHTML = "";
-  //
-  filterInfo.forEach((info) => {
-    if (info.role === roleName || info.role === "Manager") {
-      const card = createCard(info);
-      cardContainer.appendChild(card);
+  localStorage.setItem("filterInfo", JSON.stringify(filterInfo));
+  const card = cardContainer.querySelectorAll(".staffCard");
 
+  //
+  filterInfo.forEach((info, i) => {
+    if (info.role === roleName || info.role === "Manager") {
       //
-      card.addEventListener("click", (e) => {
+        card[i].style.opacity = "1";
+      card[i].addEventListener("click", (e) => {
         e.stopPropagation();
-        room.appendChild(card);
         modalCard.style.display = "none";
+        console.log(card[i]);
+        room.appendChild(card[i])
       });
+    } else {
+      card[i].style.opacity = "0.5";
     }
   });
 }
@@ -230,5 +238,9 @@ archiveGrid.addEventListener("click", (e) => {
   e.stopPropagation();
   assign(archiveGrid, "Manager");
 });
+conferenceGrid.addEventListener("click", (e) => {
+  e.stopPropagation();
+  assign(archiveGrid, "Nettoyage");
+})
 
 window.addEventListener("DOMContentLoaded", loadCard);
