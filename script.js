@@ -13,8 +13,6 @@ const pfpImg = document.getElementById("pfp");
 const emailInput = document.getElementById("email");
 const telephoneInput = document.getElementById("telephone");
 const submitBtn = document.getElementById("aj");
-const available = document.querySelector(".available");
-
 //
 const modalInfo = document.querySelector(".modalInfo");
 const infoContainer = document.querySelector(".infoContainer");
@@ -25,7 +23,6 @@ const mailInfo = document.querySelector(".mailInfo");
 const telInfo = document.querySelector(".telInfo");
 const arExp = document.querySelector(".arExp");
 const modalCard = document.querySelector(".modalCard");
-
 //
 const receptionGrid = document.querySelector(".receptionGrid");
 const serverGrid = document.querySelector(".serverGrid");
@@ -36,7 +33,6 @@ const securityGrid = document.querySelector(".securityGrid");
 
 const staffInfo = JSON.parse(localStorage.getItem("staffInfo")) || [];
 //test teception
-
 // popup
 addNew.addEventListener("click", () => (modalForm.style.display = "flex"));
 modalForm.addEventListener("click", () => (modalForm.style.display = "none"));
@@ -117,7 +113,6 @@ submitBtn.addEventListener("click", (e) => {
   //append
   cardContainer.appendChild(staffCard);
   const cloneCard = staffCard.cloneNode(true);
-  available.appendChild(cloneCard);
   const cardDelete = document.querySelector(".cardDelete");
 });
 //create
@@ -186,7 +181,6 @@ function loadCard() {
       receptionGrid.appendChild(cloneCard);
     });
     //Evenet listener for card
-    available.appendChild(cloneCard);
   });
 }
 //
@@ -211,7 +205,6 @@ function assign(room, roleName) {
       });
       }
       else{
-        
       card[i].style.opacity = "0.5";
       }
     }
@@ -221,16 +214,13 @@ function assign(room, roleName) {
       card[i].style.opacity = "1";
       card[i].addEventListener("click", (e) => {
         e.stopPropagation();
-        modalCard.style.display = "none";
-        console.log(card[i]);
         room.appendChild(card[i])
+        room.style.background = "#0000";
       });
     } 
      else {
       card[i].style.opacity = "0.5";
     }
-    //for netoyage
-   
   });
 }
 
@@ -238,7 +228,21 @@ receptionGrid.addEventListener("click", (e) => {
   e.stopPropagation();
   assign(receptionGrid, "Réceptionniste");
 });
-
+if (receptionGrid.children[0] == undefined) {
+  receptionGrid.style.background = "#f005";
+  
+}
+if (archiveGrid.children[0] == undefined) {
+  archiveGrid.style.background = "#f005";
+  
+}if (securityGrid.children[0] == undefined) {
+  securityGrid.style.background = "#f005";
+  
+}
+if (serverGrid.children[0] == undefined) {
+  serverGrid.style.background = "#f005";
+  
+}
 
 serverGrid.addEventListener("click", (e) => {
   e.stopPropagation();
