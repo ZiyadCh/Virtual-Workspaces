@@ -1,4 +1,3 @@
-
 const addNew = document.getElementById("addNew");
 
 const cardContainer = document.querySelector(".cardContainer");
@@ -23,7 +22,6 @@ const roleInfo = document.querySelector(".roleInfo");
 const mailInfo = document.querySelector(".mailInfo");
 const telInfo = document.querySelector(".telInfo");
 const arExp = document.querySelector(".arExp");
-const modalCard = document.querySelector(".modalCard");
 //
 const receptionGrid = document.querySelector(".receptionGrid");
 const serverGrid = document.querySelector(".serverGrid");
@@ -147,8 +145,10 @@ function createCard(param) {
   staffCard.className = " staffCard w-11/12 flex justify-between items-center ";
   return staffCard;
 }
+
 //showinfo
 function showInfo(param) {
+  arExp.innerHTML = "";
   nomInfo.textContent = param.nom;
   roleInfo.textContent = param.role;
   mailInfo.textContent = param.email;
@@ -177,50 +177,42 @@ function loadCard() {
   staffInfo.forEach((e) => {
     const staffCard = createCard(e);
     cardContainer.appendChild(staffCard);
-    const cloneCard = staffCard.cloneNode(true);
-    cloneCard.addEventListener("click", (e) => {
-      e.stopPropagation();
-      receptionGrid.appendChild(cloneCard);
-    });
     //Evenet listener for card
   });
 }
 //
 
+
 function assign(room, roleName) {
-  modalCard.addEventListener("click", () => (modalCard.style.display = "none"));
   const filterInfo = JSON.parse(localStorage.getItem("staffInfo"));
   localStorage.setItem("filterInfo", JSON.stringify(filterInfo));
   const card = cardContainer.querySelectorAll(".staffCard");
-
+function appendCard(e) {
+  e.stopPropagation();
+  room.appendChild(this);
+}
   //
   filterInfo.forEach((info, i) => {
     //nettoyage
     if (info.role === "Nettoyage") {
       if (room !== archiveGrid) {
-         card[i].style.opacity = "1";
-      card[i].addEventListener("click", (e) => {
-        e.stopPropagation();
-        modalCard.style.display = "none";
-        console.log(card[i]);
-        room.appendChild(card[i])
-      });
-      }
-      else{
-      card[i].style.opacity = "0.5";
+        card[i].style.opacity = "1";
+        card[i].addEventListener("click",  appendCard);
+      } else {
+        card[i].style.opacity = "0.5";
+        card[i].removeEventListener(appendCard)
       }
     }
     //autre
-   else if (info.role === roleName || info.role === "Manager" || roleName === "any") {
+    else if (
+      info.role === roleName ||
+      info.role === "Manager" ||
+      roleName === "any"
+    ) {
       //
       card[i].style.opacity = "1";
-      card[i].addEventListener("click", (e) => {
-        e.stopPropagation();
-        room.appendChild(card[i])
-        room.style.background = "#0000";
-      });
-    } 
-     else {
+      card[i].addEventListener("click",  appendCard);
+    } else {
       card[i].style.opacity = "0.5";
     }
   });
@@ -232,18 +224,15 @@ receptionGrid.addEventListener("click", (e) => {
 });
 if (receptionGrid.children[0] == undefined) {
   receptionGrid.style.background = "#f005";
-  
 }
 if (archiveGrid.children[0] == undefined) {
   archiveGrid.style.background = "#f005";
-  
-}if (securityGrid.children[0] == undefined) {
+}
+if (securityGrid.children[0] == undefined) {
   securityGrid.style.background = "#f005";
-  
 }
 if (serverGrid.children[0] == undefined) {
   serverGrid.style.background = "#f005";
-  
 }
 
 serverGrid.addEventListener("click", (e) => {
@@ -268,6 +257,6 @@ archiveGrid.addEventListener("click", (e) => {
 conferenceGrid.addEventListener("click", (e) => {
   e.stopPropagation();
   assign(conferenceGrid, "Nettoyage");
-})
+});
 
 window.addEventListener("DOMContentLoaded", loadCard);
