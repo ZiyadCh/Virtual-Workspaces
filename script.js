@@ -122,7 +122,6 @@ submitBtn.addEventListener("click", (e) => {
 });
 //create
 
-  const infoCard = document.querySelector(".infoCard");
 function createCard(param) {
   const staffCard = document.createElement("div");
   staffCard.innerHTML = `
@@ -142,8 +141,9 @@ function createCard(param) {
             <img src="images/info.png" class="infoCard" alt="info" />
           </div>
 `;
-  
-  infoCard.addEventListener("click",(e)=>{
+
+  const infoCard = staffCard.querySelector(".infoCard");
+  infoCard.addEventListener("click", (e) => {
     e.stopPropagation();
     showInfo(param);
   });
@@ -199,18 +199,38 @@ function assign(room, roleName) {
 
   //
   filterInfo.forEach((info, i) => {
-    if (info.role === roleName || info.role === "Manager") {
-      //
-        card[i].style.opacity = "1";
+    //nettoyage
+    if (info.role === "Nettoyage") {
+      if (room !== archiveGrid) {
+         card[i].style.opacity = "1";
       card[i].addEventListener("click", (e) => {
         e.stopPropagation();
         modalCard.style.display = "none";
         console.log(card[i]);
         room.appendChild(card[i])
       });
-    } else {
+      }
+      else{
+        
+      card[i].style.opacity = "0.5";
+      }
+    }
+    //autre
+   else if (info.role === roleName || info.role === "Manager" || roleName === "any") {
+      //
+      card[i].style.opacity = "1";
+      card[i].addEventListener("click", (e) => {
+        e.stopPropagation();
+        modalCard.style.display = "none";
+        console.log(card[i]);
+        room.appendChild(card[i])
+      });
+    } 
+     else {
       card[i].style.opacity = "0.5";
     }
+    //for netoyage
+   
   });
 }
 
@@ -219,6 +239,7 @@ receptionGrid.addEventListener("click", (e) => {
   assign(receptionGrid, "Réceptionniste");
 });
 
+
 serverGrid.addEventListener("click", (e) => {
   e.stopPropagation();
   assign(serverGrid, "IT");
@@ -226,7 +247,7 @@ serverGrid.addEventListener("click", (e) => {
 
 staffGrid.addEventListener("click", (e) => {
   e.stopPropagation();
-  assign(staffGrid, "Manager");
+  assign(staffGrid, "any");
 });
 
 securityGrid.addEventListener("click", (e) => {
@@ -240,7 +261,7 @@ archiveGrid.addEventListener("click", (e) => {
 });
 conferenceGrid.addEventListener("click", (e) => {
   e.stopPropagation();
-  assign(archiveGrid, "Nettoyage");
+  assign(conferenceGrid, "Nettoyage");
 })
 
 window.addEventListener("DOMContentLoaded", loadCard);

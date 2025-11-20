@@ -90,11 +90,11 @@ body {
 }
 .gGrid {
   position: absolute;
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: auto auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;align-items: center;
   width: 100%;
-  height: 100%;
+  height: 50%;
   overflow-y: scroll;
 }
 .gGrid .staffCard {
