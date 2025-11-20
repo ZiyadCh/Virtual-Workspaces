@@ -79,7 +79,7 @@ photoInput.addEventListener("input", () => {
   pfpImg.src = photoInput.value;
 });
 if (photoInput.value == "") {
-  photoInput.value = "https://avatar.iran.liara.run/public/17";
+  pfpImg.src = "https://avatar.iran.liara.run/public/17";
 }
 
 //**********************
@@ -93,7 +93,7 @@ submitBtn.addEventListener("click", (e) => {
       tache: form.querySelector(".tache").value,
       dateS: form.querySelector(".dateS").value,
       dateE: form.querySelector(".dateE").value,
-    }),
+    })
   );
 
   const info = {
@@ -187,12 +187,16 @@ function loadCard() {
 
 function assign(room, roleName) {
   modalCard.addEventListener("click", () => (modalCard.style.display = "none"));
+  const filterInfo = JSON.parse(localStorage.getItem("staffInfo"));
+  localStorage.setItem("filterInfo",JSON.stringify(filterInfo))
   cardContainer.innerHTML = "";
-  staffInfo.forEach((info) => {
+  //
+  filterInfo.forEach((info) => {
     if (info.role === roleName || info.role === "Manager") {
       const card = createCard(info);
       cardContainer.appendChild(card);
 
+      //
       card.addEventListener("click", (e) => {
         e.stopPropagation();
         room.appendChild(card);
