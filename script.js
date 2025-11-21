@@ -1,5 +1,5 @@
 const reset = document.getElementById("resetBtn");
-const gGrid = document.getElementsByClassName(".gGrid");
+const gGrid = document.getElementsByClassName("gGrid");
 const roomTitre = document.getElementsByTagName("h1");
 //
 const addNew = document.getElementById("addNew");
@@ -109,9 +109,9 @@ submitBtn.addEventListener("click", (e) => {
 
   const experience = Array.from(document.querySelectorAll(".exForm")).map(
     (form) => {
-      const tache = form.querySelector(".tache").value;
-      const dateS = form.querySelector(".dateS").value;
-      const dateE = form.querySelector(".dateE").value;
+      tache: form.querySelector(".tache").value;
+      dateS: form.querySelector(".dateS").value;
+      dateE: form.querySelector(".dateE").value;
     },
   );
 
@@ -213,7 +213,6 @@ function loadCard(param) {
 
 //asiggn!!!!
 function assign(room, roleName) {
-
   const filterInfo = JSON.parse(localStorage.getItem("staffInfo"));
   localStorage.setItem("filterInfo", JSON.stringify(filterInfo));
   const card = cardContainer.querySelectorAll(".staffCard");
@@ -223,7 +222,7 @@ function assign(room, roleName) {
     loadCard(staffInfo);
     //return
     for (let i = 0; i < gGrid.length; i++) {
-      console.log(gGrid[i]);
+      gGrid[i].children.remove();
     }
   }
   function appendCard(e) {
@@ -238,7 +237,7 @@ function assign(room, roleName) {
   function returnCard(e) {
     e.stopPropagation();
     cardContainer.appendChild(this);
-    //couleir 
+    //couleir
 
     checkColor();
   }
@@ -255,11 +254,13 @@ function assign(room, roleName) {
     }
     // autre;
     if (
-      info.role === roleName ||info.role === "Manager" || roleName === "any"
+      info.role === roleName ||
+      info.role === "Manager" ||
+      roleName === "any"
     ) {
       //
       card[i].style.display = "flex";
-      card[i].addEventListener("click", appendCard);      
+      card[i].addEventListener("click", appendCard);
     } else {
       card[i].style.display = "none";
     }
@@ -285,11 +286,11 @@ function checkColor() {
 checkColor();
 receptionGrid.addEventListener("click", (e) => {
   e.stopPropagation();
-  if (receptionGrid.children.length == 4) {
-   alert("cette chamebr") ;
+  if (receptionGrid.querySelectorAll(".staffCard").length >= 4) {
+    alert("cette chamebre");
+  } else {
+    assign(receptionGrid, "Réceptionniste");
   }
-  else{
-  assign(receptionGrid, "Réceptionniste");}
 });
 
 serverGrid.addEventListener("click", (e) => {
