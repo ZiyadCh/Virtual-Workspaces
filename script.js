@@ -111,7 +111,7 @@ submitBtn.addEventListener("click", (e) => {
       const tache = form.querySelector(".tache").value;
       const dateS = form.querySelector(".dateS").value;
       const dateE = form.querySelector(".dateE").value;
-    }
+    },
   );
 
   //if (dateS && dateE && new Date(dateS) > new Date(dateE)) {
@@ -212,6 +212,7 @@ function loadCard(param) {
 
 //asiggn!!!!
 function assign(room, roleName) {
+
   const filterInfo = JSON.parse(localStorage.getItem("staffInfo"));
   localStorage.setItem("filterInfo", JSON.stringify(filterInfo));
   const card = cardContainer.querySelectorAll(".staffCard");
@@ -227,17 +228,15 @@ function assign(room, roleName) {
     e.stopPropagation();
     room.appendChild(this);
     room.style.background = "transparent";
-    const x = document.createElement("button");
-    x.innerHTML =  ` <img src="images/remove.png" class="rem" alt="remove" `
-    this.addEventListener("click", returnCard);
-    
-    checkColor();
 
+    const rem = document.querySelector(".rem");
+    rem.addEventListener("click", returnCard);
+    checkColor();
   }
   function returnCard(e) {
     e.stopPropagation();
     cardContainer.appendChild(this);
-    //couleir
+    //couleir 
     checkColor();
   }
 
@@ -260,34 +259,38 @@ function assign(room, roleName) {
       //
       card[i].style.display = "flex";
       card[i].addEventListener("click", appendCard);
+      console.log(info.room);
+      
     } else {
       card[i].style.display = "none";
     }
   });
-
-
 }
 //couleir
 function checkColor() {
   //couleir
-if (receptionGrid.children[0] == undefined) {
-  receptionGrid.style.background = "#f005";
-}
-if (archiveGrid.children[0] == undefined) {
-  archiveGrid.style.background = "#f005";
-}
-if (securityGrid.children[0] == undefined) {
-  securityGrid.style.background = "#f005";
-}
-if (serverGrid.children[0] == undefined) {
-  serverGrid.style.background = "#f005";
-}
+  if (receptionGrid.children[0] == undefined) {
+    receptionGrid.style.background = "#f005";
+  }
+  if (archiveGrid.children[0] == undefined) {
+    archiveGrid.style.background = "#f005";
+  }
+  if (securityGrid.children[0] == undefined) {
+    securityGrid.style.background = "#f005";
+  }
+  if (serverGrid.children[0] == undefined) {
+    serverGrid.style.background = "#f005";
+  }
 }
 
 checkColor();
 receptionGrid.addEventListener("click", (e) => {
   e.stopPropagation();
-  assign(receptionGrid, "Réceptionniste");
+  if (receptionGrid.children.length == 4) {
+   alert("cette chamebr") ;
+  }
+  else{
+  assign(receptionGrid, "Réceptionniste");}
 });
 
 serverGrid.addEventListener("click", (e) => {

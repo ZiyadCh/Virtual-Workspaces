@@ -319,7 +319,7 @@ label {
 /* CardModal */
 .modalCard {
   display: none;
-  background: #0095;
+  background: #99f;
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -327,6 +327,9 @@ label {
   align-items: center;
   backdrop-filter: blur(4.1875rem);
   z-index: 10;
+}
+.modalCard img{
+  transform: scale(4);
 }
 
 /* wr */
@@ -421,23 +424,22 @@ label {
   }
 }
 /* mobile */
-@media (max-width: 720px) {
+@media (max-width: 1020px) {
   html {
     font-size: 8px;
   }
   body {
-    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     height: 100vh;
   }
   .office {
-    width: 100vw;
-    height: 70vh;
+    width: 80vw;
+    height: 100vh;
   }
   .sidebar {
-    width: 100vw;
-    height: 35vh;
+    width: 20vw;
+    height: 100vh;
     overflow-y: scroll;
   }
 
@@ -462,5 +464,22 @@ label {
     padding: 0;
     height: 10%;
     background-color: transparent;
+  }
+
+.security,
+.archive,
+.staff,
+.server {
+  width: 22vw;
+}
+.conference,
+.reception {
+  width: 29vw;
+}
+
+}
+@media (orientation: portrait) {
+    .modalCard{
+    display: flex;
   }
 }
