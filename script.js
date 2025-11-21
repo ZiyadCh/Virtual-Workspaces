@@ -1,5 +1,6 @@
 const reset = document.getElementById("resetBtn");
 const gGrid = document.getElementsByClassName(".gGrid");
+const roomTitre = document.getElementsByTagName("h1");
 //
 const addNew = document.getElementById("addNew");
 const cardContainer = document.querySelector(".cardContainer");
@@ -93,18 +94,18 @@ submitBtn.addEventListener("click", (e) => {
   const phoneRegex = /^\+?\d{7,15}$/;
 
   // Validate inputs
-  if (!nameRegex.test(nomInput.value)) {
-    alert("Nom invalide !");
-    return;
-  }
-  if (!emailRegex.test(emailInput.value)) {
-    alert("Email invalide !");
-    return;
-  }
-  if (!phoneRegex.test(telephoneInput.value)) {
-    alert("Téléphone invalide !");
-    return;
-  }
+  // if (!nameRegex.test(nomInput.value)) {
+  //   alert("Nom invalide !");
+  //   return;
+  // }
+  // if (!emailRegex.test(emailInput.value)) {
+  //   alert("Email invalide !");
+  //   return;
+  // }
+  // if (!phoneRegex.test(telephoneInput.value)) {
+  //   alert("Téléphone invalide !");
+  //   return;
+  // }
 
   const experience = Array.from(document.querySelectorAll(".exForm")).map(
     (form) => {
@@ -220,6 +221,7 @@ function assign(room, roleName) {
   function resetPos() {
     cardContainer.innerHTML = "";
     loadCard(staffInfo);
+    //return
     for (let i = 0; i < gGrid.length; i++) {
       console.log(gGrid[i]);
     }
@@ -230,13 +232,14 @@ function assign(room, roleName) {
     room.style.background = "transparent";
 
     const rem = document.querySelector(".rem");
-    rem.addEventListener("click", returnCard);
+    this.addEventListener("click", returnCard);
     checkColor();
   }
   function returnCard(e) {
     e.stopPropagation();
     cardContainer.appendChild(this);
     //couleir 
+
     checkColor();
   }
 
