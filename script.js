@@ -255,15 +255,11 @@ function assign(room, roleName) {
     }
     // autre;
     if (
-      info.role === roleName ||
-      info.role === "Manager" ||
-      roleName === "any"
+      info.role === roleName ||info.role === "Manager" || roleName === "any"
     ) {
       //
       card[i].style.display = "flex";
-      card[i].addEventListener("click", appendCard);
-      console.log(info.room);
-      
+      card[i].addEventListener("click", appendCard);      
     } else {
       card[i].style.display = "none";
     }
