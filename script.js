@@ -1,5 +1,5 @@
 const addNew = document.getElementById("addNew");
-
+const office = document.querySelector(".floor");
 const cardContainer = document.querySelector(".cardContainer");
 const modalForm = document.querySelector(".modalForm");
 const exp = document.querySelector(".exp");
@@ -84,13 +84,38 @@ if (photoInput.value == "") {
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
 
+  const nameRegex = /^[a-zA-Z\s]{2,50}$/; // only letters and spaces, 2-50 chars
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // basic email pattern
+  const phoneRegex = /^\+?\d{7,15}$/; // digits, optional +, 7-15 digits
+
+  // Validate inputs
+  if (!nameRegex.test(nomInput.value)) {
+    alert("Nom invalide !");
+    return;
+  }
+  if (!emailRegex.test(emailInput.value)) {
+    alert("Email invalide !");
+    return;
+  }
+  if (!phoneRegex.test(telephoneInput.value)) {
+    alert("Téléphone invalide !");
+    return;
+  }
+
   const experience = Array.from(document.querySelectorAll(".exForm")).map(
-    (form) => ({
-      tache: form.querySelector(".tache").value,
-      dateS: form.querySelector(".dateS").value,
-      dateE: form.querySelector(".dateE").value,
-    })
+    (form) => {
+      const tache = form.querySelector(".tache").value;
+      const dateS = form.querySelector(".dateS").value;
+      const dateE = form.querySelector(".dateE").value;
+    },
   );
+
+  //if (dateS && dateE && new Date(dateS) > new Date(dateE)) {
+  //  alert(
+  //    `La date de début (${dateS}) ne peut pas être après la date de fin (${dateE}) pour la tâche "${tache}".`,
+  // );
+  // throw new Error("Date validation failed");
+  // }
 
   const info = {
     nom: nomInput.value,
@@ -182,58 +207,54 @@ function loadCard() {
 }
 //
 
-
 function assign(room, roleName) {
   const filterInfo = JSON.parse(localStorage.getItem("staffInfo"));
   localStorage.setItem("filterInfo", JSON.stringify(filterInfo));
   const card = cardContainer.querySelectorAll(".staffCard");
-function appendCard(e) {
-  e.stopPropagation();
-  room.appendChild(this);
-}
+
+  function appendCard(e) {
+    e.stopPropagation();
+    room.appendChild(this);
+    room.style.background = "transparent";
+  }
+
   //
   filterInfo.forEach((info, i) => {
-    //nettoyage
     if (info.role === "Nettoyage") {
       if (room !== archiveGrid) {
-        card[i].style.opacity = "1";
-        card[i].addEventListener("click",  appendCard);
+        card[i].style.display = "flex";
+        card[i].addEventListener("click", appendCard);
       } else {
-        card[i].style.opacity = "0.5";
-        card[i].removeEventListener(appendCard)
+        card[i].style.display = "none";
       }
     }
-    //autre
-    else if (
+    // autre;
+    if (
       info.role === roleName ||
       info.role === "Manager" ||
       roleName === "any"
     ) {
       //
-      card[i].style.opacity = "1";
-      card[i].addEventListener("click",  appendCard);
+      card[i].style.display = "flex";
+      card[i].addEventListener("click", appendCard);
     } else {
-      card[i].style.opacity = "0.5";
+      card[i].style.display = "none";
+      card[i].removeEventListener("click", appendCard);
     }
   });
+
+  function reDisplay(e) {
+    staffCard.forEach((e) => {
+      e.style.display = "flex";
+    });
+    office.addEventListener("click", reDisplay);
+  }
 }
 
 receptionGrid.addEventListener("click", (e) => {
   e.stopPropagation();
   assign(receptionGrid, "Réceptionniste");
 });
-if (receptionGrid.children[0] == undefined) {
-  receptionGrid.style.background = "#f005";
-}
-if (archiveGrid.children[0] == undefined) {
-  archiveGrid.style.background = "#f005";
-}
-if (securityGrid.children[0] == undefined) {
-  securityGrid.style.background = "#f005";
-}
-if (serverGrid.children[0] == undefined) {
-  serverGrid.style.background = "#f005";
-}
 
 serverGrid.addEventListener("click", (e) => {
   e.stopPropagation();
@@ -258,5 +279,18 @@ conferenceGrid.addEventListener("click", (e) => {
   e.stopPropagation();
   assign(conferenceGrid, "Nettoyage");
 });
+//couleir
+if (receptionGrid.children[0] == undefined) {
+  receptionGrid.style.background = "#f005";
+}
+if (archiveGrid.children[0] == undefined) {
+  archiveGrid.style.background = "#f005";
+}
+if (securityGrid.children[0] == undefined) {
+  securityGrid.style.background = "#f005";
+}
+if (serverGrid.children[0] == undefined) {
+  serverGrid.style.background = "#f005";
+}
 
 window.addEventListener("DOMContentLoaded", loadCard);
