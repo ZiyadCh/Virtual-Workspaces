@@ -84,9 +84,9 @@ if (photoInput.value == "") {
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
 
-  const nameRegex = /^[a-zA-Z\s]{2,50}$/; // only letters and spaces, 2-50 chars
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // basic email pattern
-  const phoneRegex = /^\+?\d{7,15}$/; // digits, optional +, 7-15 digits
+  const nameRegex = /^[a-zA-Z\s]{2,50}$/; 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const phoneRegex = /^\+?\d{7,15}$/;
 
   // Validate inputs
   if (!nameRegex.test(nomInput.value)) {
@@ -125,6 +125,7 @@ submitBtn.addEventListener("click", (e) => {
     tel: telephoneInput.value,
     add: addresInput.value,
     exp: experience,
+    room: "",
   };
   //test
 
@@ -241,14 +242,17 @@ function assign(room, roleName) {
       card[i].style.display = "none";
       card[i].removeEventListener("click", appendCard);
     }
+    console.log( "filter" + filterInfo)
+    console.log( "original" + staffInfo)
   });
 
   function reDisplay(e) {
-    staffCard.forEach((e) => {
+    card.forEach((e) => {
       e.style.display = "flex";
     });
-    office.addEventListener("click", reDisplay);
   }
+
+    office.addEventListener("click", reDisplay);
 }
 
 receptionGrid.addEventListener("click", (e) => {
