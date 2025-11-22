@@ -26,6 +26,7 @@ const mailInfo = document.querySelector(".mailInfo");
 const telInfo = document.querySelector(".telInfo");
 const arExp = document.querySelector(".arExp");
 const adrInfo = document.querySelector(".addresInfo");
+const locationInfo = document.querySelector(".locationInfo");
 
 //
 const receptionGrid = document.querySelector(".receptionGrid");
@@ -88,6 +89,7 @@ if (photoInput.value == "") {
 //**********************
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
+  let staff = JSON.parse(localStorage.getItem("staffInfo")) || [];
 
   const nameRegex = /^[a-zA-Z\s]{2,50}$/;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -130,13 +132,13 @@ submitBtn.addEventListener("click", (e) => {
     tel: telephoneInput.value,
     add: addresInput.value,
     exp: experience,
-    room: "Pas Assignés",
+    room: "Unassigend",
+  index: staff.length,
   };
   //test
 
   //
 
-  let staff = JSON.parse(localStorage.getItem("staffInfo")) || [];
   staff.push(info);
   localStorage.setItem("staffInfo", JSON.stringify(staff));
   //create the card
@@ -149,6 +151,7 @@ submitBtn.addEventListener("click", (e) => {
 
 function createCard(param) {
   const staffCard = document.createElement("div");
+staffCard.dataset.index = param.index;
   staffCard.innerHTML = `
           <img
             class="cardPfp aspect-square rounded-full border-2 w-20 h-20"
@@ -184,6 +187,7 @@ function showInfo(param) {
   telInfo.textContent = param.tel;
   adrInfo.textContent = param.add;
   pfpInfo.src = param.pfp;
+  locationInfo.textContent = param.room;
 
   if (param.exp.length > 0) {
     param.exp.forEach((e) => {
@@ -204,15 +208,15 @@ function showInfo(param) {
 }
 //load
 function loadCard(param) {
-  param.forEach((e) => {
-    const staffCard = createCard(e);
-    cardContainer.appendChild(staffCard);
-  });
+  param.slice().sort((a, b) => a.index - b.index).forEach((e) => {
+      const staffCard = createCard(e);
+      cardContainer.appendChild(staffCard);
+    });
 }
 //
 
 //asiggn!!!!
-function assign(room, roleName) {
+function assign(room, roleName, roomName) {
   const filterInfo = JSON.parse(localStorage.getItem("staffInfo"));
   localStorage.setItem("filterInfo", JSON.stringify(filterInfo));
   const card = cardContainer.querySelectorAll(".staffCard");
@@ -247,7 +251,7 @@ function assign(room, roleName) {
 
   //NETTOYAGEFEfef
   filterInfo.forEach((info, i) => {
-    
+
     // if (info.role === "Nettoyage") {
     //   if (room === archiveGrid) {
     //     card[i].style.display = "none";
@@ -265,8 +269,12 @@ function assign(room, roleName) {
       //
       card[i].style.opacity = "1";
       card[i].addEventListener("click", appendCard);
+      info.room = roomName;
+      card[i].style.pointerEvents = "auto";
+
     } else {
       card[i].style.opacity = "0.5";
+      card[i].style.pointerEvents = "none";
     }
   });
 }
@@ -293,7 +301,7 @@ receptionGrid.addEventListener("click", (e) => {
   if (receptionGrid.querySelectorAll(".staffCard").length >= 4) {
     alert("cette chamebre");
   } else {
-    assign(receptionGrid, "Réceptionniste");
+    assign(receptionGrid, "Réceptionniste", "Salle de Reception");
   }
 });
 
