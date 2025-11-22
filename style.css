@@ -4,6 +4,9 @@
   margin: 0;
   font-family: "Sansation";
 }
+html{
+  font-size: 10px;
+}
 ::-webkit-scrollbar {
   display: none;
 }

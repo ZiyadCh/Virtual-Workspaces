@@ -1,5 +1,5 @@
 const reset = document.getElementById("resetBtn");
-const gGrid = document.getElementsByClassName("gGrid");
+const chGrid = document.getElementsByClassName("chGrid");
 const roomTitre = document.getElementsByTagName("h1");
 //
 const addNew = document.getElementById("addNew");
@@ -26,6 +26,7 @@ const mailInfo = document.querySelector(".mailInfo");
 const telInfo = document.querySelector(".telInfo");
 const arExp = document.querySelector(".arExp");
 const adrInfo = document.querySelector(".addresInfo");
+const locationInfo = document.querySelector(".locationInfo");
 
 //
 const receptionGrid = document.querySelector(".receptionGrid");
@@ -130,25 +131,25 @@ submitBtn.addEventListener("click", (e) => {
     tel: telephoneInput.value,
     add: addresInput.value,
     exp: experience,
-    room: "Pas Assignés",
+    room: "Unassigend",
+  index: staffInfo.length,
   };
   //test
 
   //
 
-  let staff = JSON.parse(localStorage.getItem("staffInfo")) || [];
-  staff.push(info);
-  localStorage.setItem("staffInfo", JSON.stringify(staff));
+  staffInfo.push(info);
+  localStorage.setItem("staffInfo", JSON.stringify(staffInfo));
   //create the card
   const staffCard = createCard(info);
   //append
   cardContainer.appendChild(staffCard);
-  const cloneCard = staffCard.cloneNode(true);
 });
 //create
 
 function createCard(param) {
   const staffCard = document.createElement("div");
+staffCard.dataset.index = param.index;
   staffCard.innerHTML = `
           <img
             class="cardPfp aspect-square rounded-full border-2 w-20 h-20"
@@ -184,6 +185,7 @@ function showInfo(param) {
   telInfo.textContent = param.tel;
   adrInfo.textContent = param.add;
   pfpInfo.src = param.pfp;
+  locationInfo.textContent = param.room;
 
   if (param.exp.length > 0) {
     param.exp.forEach((e) => {
@@ -204,15 +206,15 @@ function showInfo(param) {
 }
 //load
 function loadCard(param) {
-  param.forEach((e) => {
-    const staffCard = createCard(e);
-    cardContainer.appendChild(staffCard);
-  });
+  param.slice().sort((a, b) => a.index - b.index).forEach((e) => {
+      const staffCard = createCard(e);
+      cardContainer.appendChild(staffCard);
+    });
 }
 //
 
 //asiggn!!!!
-function assign(room, roleName) {
+function assign(room, roleName, roomName) {
   const filterInfo = JSON.parse(localStorage.getItem("staffInfo"));
   localStorage.setItem("filterInfo", JSON.stringify(filterInfo));
   const card = cardContainer.querySelectorAll(".staffCard");
@@ -221,12 +223,10 @@ function assign(room, roleName) {
 
   function resetPos() {
     cardContainer.innerHTML = "";
-
     loadCard(staffInfo);
     //return
-    for (let i = 0; i < gGrid.length; i++) {
-      gGrid[i].innerHTML = "";
-    }
+document.querySelectorAll(".receptionGrid, .serverGrid, .archiveGrid, .staffGrid, .conferenceGrid, .securityGrid")
+    .forEach(grid => grid.innerHTML = "");
   }
   function appendCard(e) {
     e.stopPropagation();
@@ -246,27 +246,24 @@ function assign(room, roleName) {
   }
 
   //NETTOYAGEFEfef
-  filterInfo.forEach((info, i) => {
-    
-    // if (info.role === "Nettoyage") {
-    //   if (room === archiveGrid) {
-    //     card[i].style.display = "none";
-    //   } else {
-    //     card[i].style.display = "flex";
-    //     card[i].addEventListener("click", appendCard);
-    //   }
-    // }
-    // autre;
-    if (
-      info.role === roleName ||
-      info.role === "Manager" ||
-      roleName === "any"
-    ) {
-      //
-      card[i].style.opacity = "1";
-      card[i].addEventListener("click", appendCard);
+document.querySelectorAll(".staffCard").forEach(card => {
+    const i = card.dataset.index;
+    const info = staffInfo[i];
+
+    if (info.role === roleName || info.role === "Manager" || roleName === "any") {
+      card.style.opacity = "1";
+      card.style.pointerEvents = "auto";
+      card.onclick = () => {
+        info.room = roomName;
+        localStorage.setItem("staffInfo", JSON.stringify(staffInfo));
+        room.appendChild(card);
+card.addEventListener("click", returnCard);
+        checkColor();
+      };
     } else {
-      card[i].style.opacity = "0.5";
+      card.style.opacity = "0.5";
+      card.style.pointerEvents = "none";
+      card.onclick = null;
     }
   });
 }
@@ -293,7 +290,7 @@ receptionGrid.addEventListener("click", (e) => {
   if (receptionGrid.querySelectorAll(".staffCard").length >= 4) {
     alert("cette chamebre");
   } else {
-    assign(receptionGrid, "Réceptionniste");
+    assign(receptionGrid, "Réceptionniste", "Salle de Reception");
   }
 });
 
