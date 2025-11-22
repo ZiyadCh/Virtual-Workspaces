@@ -130,7 +130,7 @@ submitBtn.addEventListener("click", (e) => {
     tel: telephoneInput.value,
     add: addresInput.value,
     exp: experience,
-    room: "",
+    room: "Pas Assignés",
   };
   //test
 
@@ -216,20 +216,23 @@ function assign(room, roleName) {
   const filterInfo = JSON.parse(localStorage.getItem("staffInfo"));
   localStorage.setItem("filterInfo", JSON.stringify(filterInfo));
   const card = cardContainer.querySelectorAll(".staffCard");
+
   reset.addEventListener("click", resetPos);
+
   function resetPos() {
     cardContainer.innerHTML = "";
+
     loadCard(staffInfo);
     //return
     for (let i = 0; i < gGrid.length; i++) {
-      gGrid[i].children.remove();
+      gGrid[i].innerHTML = "";
     }
   }
   function appendCard(e) {
     e.stopPropagation();
     room.appendChild(this);
-    room.style.background = "transparent";
 
+    room.style.background = "transparent";
     const rem = document.querySelector(".rem");
     this.addEventListener("click", returnCard);
     checkColor();
@@ -244,14 +247,15 @@ function assign(room, roleName) {
 
   //NETTOYAGEFEfef
   filterInfo.forEach((info, i) => {
-    if (info.role === "Nettoyage") {
-      if (room === archiveGrid) {
-        card[i].style.display = "none";
-      } else {
-        card[i].style.display = "flex";
-        card[i].addEventListener("click", appendCard);
-      }
-    }
+    
+    // if (info.role === "Nettoyage") {
+    //   if (room === archiveGrid) {
+    //     card[i].style.display = "none";
+    //   } else {
+    //     card[i].style.display = "flex";
+    //     card[i].addEventListener("click", appendCard);
+    //   }
+    // }
     // autre;
     if (
       info.role === roleName ||
@@ -259,10 +263,10 @@ function assign(room, roleName) {
       roleName === "any"
     ) {
       //
-      card[i].style.display = "flex";
+      card[i].style.opacity = "1";
       card[i].addEventListener("click", appendCard);
     } else {
-      card[i].style.display = "none";
+      card[i].style.opacity = "0.5";
     }
   });
 }
