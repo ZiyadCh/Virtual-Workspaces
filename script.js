@@ -89,39 +89,53 @@ if (photoInput.value == "") {
 //**********************
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
-
+let valid = true;
   const nameRegex = /^[a-zA-Z\s]{2,50}$/;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const phoneRegex = /^\+?\d{7,15}$/;
 
   // Validate inputs
-   if (!nameRegex.test(nomInput.value)) {
-     alert("Nom invalide !");
-     return;
-   }
+  if (!nameRegex.test(nomInput.value)) {
+    alert("Nom invalide !");
+    return;
+  }
   if (!emailRegex.test(emailInput.value)) {
-     alert("Email invalide !");
-     return;
-   }
-   if (!phoneRegex.test(telephoneInput.value)) {
-     alert("Téléphone invalide !");
-     return;
-   }
+    alert("Email invalide !");
+    return;
+  }
+  if (!phoneRegex.test(telephoneInput.value)) {
+    alert("Téléphone invalide !");
+    return;
+  }
+  if (valid == false) {
+   return; 
+  }
 
   const experience = Array.from(document.querySelectorAll(".exForm")).map(
-    (form) => {
-      tache: form.querySelector(".tache").value;
-      dateS: form.querySelector(".dateS").value;
-      dateE: form.querySelector(".dateE").value;
-    },
-  );
+    (form, index) => {
+      const tache = form.querySelector(".tache").value;
+      const dateS = form.querySelector(".dateS").value;
+      const dateE = form.querySelector(".dateE").value;
 
-  if (dateS && dateE && new Date(dateS) > new Date(dateE)) {
-    alert(
-      `La date de début (${dateS}) ne peut pas être après la date de fin (${dateE}) pour la tâche "${tache}".`,
-   );
-   throw new Error("Date validation failed");
-   }
+      if (dateS == "" || dateE == "" || tache == "") {
+       alert("Remplire tout les champ") 
+        valid = false;
+       return;
+      }
+      if (new Date(dateS) > new Date(dateE)) {
+        alert("la date debut ne peu pas etre apres la dates fin! ");
+        valid = false;
+        return;
+      } else {
+        valid= true;
+        return {
+          tache: tache,
+          dateS: dateS,
+          dateE: dateE,
+        };
+      }
+    }
+  );
 
   const info = {
     nom: nomInput.value,
@@ -132,24 +146,26 @@ submitBtn.addEventListener("click", (e) => {
     add: addresInput.value,
     exp: experience,
     room: "Unassigend",
-  index: staffInfo.length,
+    index: staffInfo.length,
   };
   //test
 
   //
 
+  if (valid == true) {
   staffInfo.push(info);
   localStorage.setItem("staffInfo", JSON.stringify(staffInfo));
   //create the card
   const staffCard = createCard(info);
   //append
   cardContainer.appendChild(staffCard);
+  }
 });
 //create
 
 function createCard(param) {
   const staffCard = document.createElement("div");
-staffCard.dataset.index = param.index;
+  staffCard.dataset.index = param.index;
   staffCard.innerHTML = `
           <img
             class="cardPfp aspect-square rounded-full border-2 w-20 h-20"
@@ -175,7 +191,6 @@ staffCard.dataset.index = param.index;
   });
   staffCard.className = " staffCard w-11/12 flex justify-between items-center ";
   return staffCard;
-
 }
 
 //showinfo
@@ -201,14 +216,17 @@ function showInfo(param) {
       arExp.appendChild(div);
     });
   } else {
-    arExp.innerHTML = "<p>Aucune expérience enregistrée.</p>";
+    arExp.innerHTML = "<p>Aucune expérience .</p>";
   }
 
   modalInfo.style.display = "flex";
 }
 //load
 function loadCard(param) {
-  param.slice().sort((a, b) => a.index - b.index).forEach((e) => {
+  param
+    .slice()
+    .sort((a, b) => a.index - b.index)
+    .forEach((e) => {
       const staffCard = createCard(e);
       cardContainer.appendChild(staffCard);
     });
@@ -216,7 +234,7 @@ function loadCard(param) {
 //
 
 //asiggn!!!!
-function assign(room, roleName, roomName,max) {
+function assign(room, roleName, roomName, max) {
   const filterInfo = JSON.parse(localStorage.getItem("staffInfo"));
   localStorage.setItem("filterInfo", JSON.stringify(filterInfo));
   const card = cardContainer.querySelectorAll(".staffCard");
@@ -227,8 +245,11 @@ function assign(room, roleName, roomName,max) {
     cardContainer.innerHTML = "";
     loadCard(staffInfo);
     //return
-document.querySelectorAll(".receptionGrid, .serverGrid, .archiveGrid, .staffGrid, .conferenceGrid, .securityGrid")
-    .forEach(grid => grid.innerHTML = "");
+    document
+      .querySelectorAll(
+        ".receptionGrid, .serverGrid, .archiveGrid, .staffGrid, .conferenceGrid, .securityGrid"
+      )
+      .forEach((grid) => (grid.innerHTML = ""));
   }
   function appendCard(e) {
     e.stopPropagation();
@@ -245,23 +266,26 @@ document.querySelectorAll(".receptionGrid, .serverGrid, .archiveGrid, .staffGrid
   }
 
   //NETTOYAGEFEfef
-document.querySelectorAll(".staffCard").forEach(card => {
+  document.querySelectorAll(".staffCard").forEach((card) => {
     const i = card.dataset.index;
     const info = staffInfo[i];
 
-    if (info.role === roleName || info.role === "Manager" || roleName === "any") {
+    if (
+      info.role === roleName ||
+      info.role === "Manager" ||
+      roleName === "any"
+    ) {
       card.style.opacity = "1";
       card.style.pointerEvents = "auto";
       card.onclick = () => {
-
-if (room.querySelectorAll(".staffCard").length >= max) {
-    alert("!!salle plein!!");
-    return; 
-  }
+        if (room.querySelectorAll(".staffCard").length >= max) {
+          alert("!!salle plein!!");
+          return;
+        }
         info.room = roomName;
         localStorage.setItem("staffInfo", JSON.stringify(staffInfo));
         room.appendChild(card);
-card.querySelector(".remCard").addEventListener("click", returnCard);
+        card.querySelector(".remCard").addEventListener("click", returnCard);
 
         checkColor();
       };
@@ -277,26 +301,22 @@ function checkColor() {
   //couleir
   if (receptionGrid.children[0] == undefined) {
     receptionGrid.style.background = "#f005";
-  }
-  else{
+  } else {
     receptionGrid.style.background = "transparent";
   }
   if (archiveGrid.children[0] == undefined) {
     archiveGrid.style.background = "#f005";
-  }
-  else{
+  } else {
     archiveGrid.style.background = "transparent";
   }
   if (securityGrid.children[0] == undefined) {
     securityGrid.style.background = "#f005";
-  }
-  else{
+  } else {
     securityGrid.style.background = "transparent";
   }
   if (serverGrid.children[0] == undefined) {
     serverGrid.style.background = "#f005";
-  }
-  else{
+  } else {
     serverGrid.style.background = "transparent";
   }
 }
@@ -304,7 +324,7 @@ function checkColor() {
 checkColor();
 receptionGrid.addEventListener("click", (e) => {
   e.stopPropagation();
-    assign(receptionGrid, "Réceptionniste", "Salle de Reception", 6);
+  assign(receptionGrid, "Réceptionniste", "Salle de Reception", 6);
 });
 
 serverGrid.addEventListener("click", (e) => {
@@ -324,11 +344,11 @@ securityGrid.addEventListener("click", (e) => {
 
 archiveGrid.addEventListener("click", (e) => {
   e.stopPropagation();
-  assign(archiveGrid, "Manager", "L'archive", 1,);
+  assign(archiveGrid, "Manager", "L'archive", 1);
 });
 conferenceGrid.addEventListener("click", (e) => {
   e.stopPropagation();
-  assign(conferenceGrid, "Nettoyage", "Comference" , 3);
+  assign(conferenceGrid, "Nettoyage", "Comference", 3);
 });
 
 //loadCards at the brigining
