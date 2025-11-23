@@ -315,7 +315,7 @@ select {
   background: #eee;
   border: 2px solid #ddd;
   border-radius: 25px;
-  width: 95%;
+  width: 85%;
   padding: 1rem;
   display: grid;
   grid-template-columns: auto auto;

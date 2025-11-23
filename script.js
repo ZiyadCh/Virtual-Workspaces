@@ -273,7 +273,8 @@ function assign(room, roleName, roomName, max) {
     if (
       info.role === roleName ||
       info.role === "Manager" ||
-      roleName === "any"
+      roleName === "any" ||
+      (info.role === "Nettoyage" && roleName !== "Manager")
     ) {
       card.style.opacity = "1";
       card.style.pointerEvents = "auto";
