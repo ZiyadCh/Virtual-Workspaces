@@ -1,5 +1,5 @@
 const reset = document.getElementById("resetBtn");
-const gGrid = document.getElementsByClassName("gGrid");
+const chGrid = document.getElementsByClassName("chGrid");
 const roomTitre = document.getElementsByTagName("h1");
 //
 const addNew = document.getElementById("addNew");
@@ -89,7 +89,6 @@ if (photoInput.value == "") {
 //**********************
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  let staff = JSON.parse(localStorage.getItem("staffInfo")) || [];
 
   const nameRegex = /^[a-zA-Z\s]{2,50}$/;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -133,19 +132,18 @@ submitBtn.addEventListener("click", (e) => {
     add: addresInput.value,
     exp: experience,
     room: "Unassigend",
-  index: staff.length,
+  index: staffInfo.length,
   };
   //test
 
   //
 
-  staff.push(info);
-  localStorage.setItem("staffInfo", JSON.stringify(staff));
+  staffInfo.push(info);
+  localStorage.setItem("staffInfo", JSON.stringify(staffInfo));
   //create the card
   const staffCard = createCard(info);
   //append
   cardContainer.appendChild(staffCard);
-  const cloneCard = staffCard.cloneNode(true);
 });
 //create
 
@@ -216,7 +214,7 @@ function loadCard(param) {
 //
 
 //asiggn!!!!
-function assign(room, roleName, roomName) {
+function assign(room, roleName, roomName,max) {
   const filterInfo = JSON.parse(localStorage.getItem("staffInfo"));
   localStorage.setItem("filterInfo", JSON.stringify(filterInfo));
   const card = cardContainer.querySelectorAll(".staffCard");
@@ -225,12 +223,10 @@ function assign(room, roleName, roomName) {
 
   function resetPos() {
     cardContainer.innerHTML = "";
-
     loadCard(staffInfo);
     //return
-    for (let i = 0; i < gGrid.length; i++) {
-      gGrid[i].innerHTML = "";
-    }
+document.querySelectorAll(".receptionGrid, .serverGrid, .archiveGrid, .staffGrid, .conferenceGrid, .securityGrid")
+    .forEach(grid => grid.innerHTML = "");
   }
   function appendCard(e) {
     e.stopPropagation();
@@ -250,31 +246,29 @@ function assign(room, roleName, roomName) {
   }
 
   //NETTOYAGEFEfef
-  filterInfo.forEach((info, i) => {
+document.querySelectorAll(".staffCard").forEach(card => {
+    const i = card.dataset.index;
+    const info = staffInfo[i];
 
-    // if (info.role === "Nettoyage") {
-    //   if (room === archiveGrid) {
-    //     card[i].style.display = "none";
-    //   } else {
-    //     card[i].style.display = "flex";
-    //     card[i].addEventListener("click", appendCard);
-    //   }
-    // }
-    // autre;
-    if (
-      info.role === roleName ||
-      info.role === "Manager" ||
-      roleName === "any"
-    ) {
-      //
-      card[i].style.opacity = "1";
-      card[i].addEventListener("click", appendCard);
-      info.room = roomName;
-      card[i].style.pointerEvents = "auto";
+    if (info.role === roleName || info.role === "Manager" || roleName === "any") {
+      card.style.opacity = "1";
+      card.style.pointerEvents = "auto";
+      card.onclick = () => {
 
+if (room.querySelectorAll(".staffCard").length >= max) {
+    alert("!!salle plein!!");
+    return; 
+  }
+        info.room = roomName;
+        localStorage.setItem("staffInfo", JSON.stringify(staffInfo));
+        room.appendChild(card);
+card.addEventListener("click", returnCard);
+        checkColor();
+      };
     } else {
-      card[i].style.opacity = "0.5";
-      card[i].style.pointerEvents = "none";
+      card.style.opacity = "0.5";
+      card.style.pointerEvents = "none";
+      card.onclick = null;
     }
   });
 }
@@ -298,35 +292,31 @@ function checkColor() {
 checkColor();
 receptionGrid.addEventListener("click", (e) => {
   e.stopPropagation();
-  if (receptionGrid.querySelectorAll(".staffCard").length >= 4) {
-    alert("cette chamebre");
-  } else {
-    assign(receptionGrid, "Réceptionniste", "Salle de Reception");
-  }
+    assign(receptionGrid, "Réceptionniste", "Salle de Reception", 6);
 });
 
 serverGrid.addEventListener("click", (e) => {
   e.stopPropagation();
-  assign(serverGrid, "IT");
+  assign(serverGrid, "IT", "Salle Des Serveurs", 2);
 });
 
 staffGrid.addEventListener("click", (e) => {
   e.stopPropagation();
-  assign(staffGrid, "any");
+  assign(staffGrid, "any", "Personel", 5);
 });
 
 securityGrid.addEventListener("click", (e) => {
   e.stopPropagation();
-  assign(securityGrid, "Sécurité");
+  assign(securityGrid, "Sécurité", "Secutiter", 2);
 });
 
 archiveGrid.addEventListener("click", (e) => {
   e.stopPropagation();
-  assign(archiveGrid, "Manager");
+  assign(archiveGrid, "Manager", "L'archive", 1,);
 });
 conferenceGrid.addEventListener("click", (e) => {
   e.stopPropagation();
-  assign(conferenceGrid, "Nettoyage");
+  assign(conferenceGrid, "Nettoyage", "Comference" , 3);
 });
 
 //loadCards at the brigining
