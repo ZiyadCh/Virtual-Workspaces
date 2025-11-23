@@ -95,18 +95,18 @@ submitBtn.addEventListener("click", (e) => {
   const phoneRegex = /^\+?\d{7,15}$/;
 
   // Validate inputs
-  // if (!nameRegex.test(nomInput.value)) {
-  //   alert("Nom invalide !");
-  //   return;
-  // }
-  // if (!emailRegex.test(emailInput.value)) {
-  //   alert("Email invalide !");
-  //   return;
-  // }
-  // if (!phoneRegex.test(telephoneInput.value)) {
-  //   alert("Téléphone invalide !");
-  //   return;
-  // }
+   if (!nameRegex.test(nomInput.value)) {
+     alert("Nom invalide !");
+     return;
+   }
+  if (!emailRegex.test(emailInput.value)) {
+     alert("Email invalide !");
+     return;
+   }
+   if (!phoneRegex.test(telephoneInput.value)) {
+     alert("Téléphone invalide !");
+     return;
+   }
 
   const experience = Array.from(document.querySelectorAll(".exForm")).map(
     (form) => {
@@ -116,17 +116,17 @@ submitBtn.addEventListener("click", (e) => {
     },
   );
 
-  //if (dateS && dateE && new Date(dateS) > new Date(dateE)) {
-  //  alert(
-  //    `La date de début (${dateS}) ne peut pas être après la date de fin (${dateE}) pour la tâche "${tache}".`,
-  // );
-  // throw new Error("Date validation failed");
-  // }
+  if (dateS && dateE && new Date(dateS) > new Date(dateE)) {
+    alert(
+      `La date de début (${dateS}) ne peut pas être après la date de fin (${dateE}) pour la tâche "${tache}".`,
+   );
+   throw new Error("Date validation failed");
+   }
 
   const info = {
     nom: nomInput.value,
     role: roleSelect.value,
-    pfp: photoInput.value,
+    pfp: pfpImg.src,
     email: emailInput.value,
     tel: telephoneInput.value,
     add: addresInput.value,
@@ -161,9 +161,10 @@ staffCard.dataset.index = param.index;
             <h3>${param.role}</h3>
           </div>
           <div
-            class="flex flex-col w-1/12 h-12/12 justify-between items-center"
+            class=""
           >
             <img src="images/info.png" class="infoCard" alt="info" />
+            <img src="images/remove.png" class="remCard" alt="Remove" />
           </div>
 `;
 
@@ -174,6 +175,7 @@ staffCard.dataset.index = param.index;
   });
   staffCard.className = " staffCard w-11/12 flex justify-between items-center ";
   return staffCard;
+
 }
 
 //showinfo
@@ -231,15 +233,12 @@ document.querySelectorAll(".receptionGrid, .serverGrid, .archiveGrid, .staffGrid
   function appendCard(e) {
     e.stopPropagation();
     room.appendChild(this);
-
-    room.style.background = "transparent";
-    const rem = document.querySelector(".rem");
     this.addEventListener("click", returnCard);
     checkColor();
   }
   function returnCard(e) {
     e.stopPropagation();
-    cardContainer.appendChild(this);
+    cardContainer.appendChild(this.parentElement.parentElement);
     //couleir
 
     checkColor();
@@ -262,7 +261,8 @@ if (room.querySelectorAll(".staffCard").length >= max) {
         info.room = roomName;
         localStorage.setItem("staffInfo", JSON.stringify(staffInfo));
         room.appendChild(card);
-card.addEventListener("click", returnCard);
+card.querySelector(".remCard").addEventListener("click", returnCard);
+
         checkColor();
       };
     } else {
@@ -278,14 +278,26 @@ function checkColor() {
   if (receptionGrid.children[0] == undefined) {
     receptionGrid.style.background = "#f005";
   }
+  else{
+    receptionGrid.style.background = "transparent";
+  }
   if (archiveGrid.children[0] == undefined) {
     archiveGrid.style.background = "#f005";
+  }
+  else{
+    archiveGrid.style.background = "transparent";
   }
   if (securityGrid.children[0] == undefined) {
     securityGrid.style.background = "#f005";
   }
+  else{
+    securityGrid.style.background = "transparent";
+  }
   if (serverGrid.children[0] == undefined) {
     serverGrid.style.background = "#f005";
+  }
+  else{
+    serverGrid.style.background = "transparent";
   }
 }
 

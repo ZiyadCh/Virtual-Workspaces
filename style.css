@@ -46,6 +46,9 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  .remCard{
+    display: block;
+  }
 }
 .conference {
   grid-column: 1/3;
@@ -148,6 +151,7 @@ body {
   transition: 0.3s;
   border: solid 1px #99f;
   cursor: pointer;
+  position: relative;
 }
 
 .staffCard:hover {
@@ -170,6 +174,13 @@ body {
 .infoCard:hover {
   transform: translateY(-5px);
   transform: scale(1.5);
+}
+.remCard {
+  transition: 0.5s;
+  bottom: 20%;
+  display: none;
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
 }
 
 /* modal form */
@@ -438,20 +449,19 @@ label {
     width: 20vw;
   }
   .room  h1{
-    padding: 0;
-    height: 10%;
-    background-color: transparent;
+  }
+  .room button{
   }
 
 .security,
 .archive,
 .staff,
 .server {
-  width: 22vw;
+  width: 18vw;
 }
 .conference,
 .reception {
-  width: 29vw;
+  width: 31vw;
 }
 
 }
