@@ -99,6 +99,11 @@ let valid = true;
     alert("Nom invalide !");
     return;
   }
+  if (roleSelect.value == "") {
+    
+    alert(" Choisir un role !");
+    return;
+  }
   if (!emailRegex.test(emailInput.value)) {
     alert("Email invalide !");
     return;
