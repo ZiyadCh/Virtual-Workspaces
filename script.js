@@ -236,8 +236,6 @@ function loadCard(param) {
 
 //asiggn!!!!
 function assign(room, roleName, roomName, max) {
-  const filterInfo = JSON.parse(localStorage.getItem("staffInfo"));
-  localStorage.setItem("filterInfo", JSON.stringify(filterInfo));
   const card = cardContainer.querySelectorAll(".staffCard");
 
   reset.addEventListener("click", resetPos);
