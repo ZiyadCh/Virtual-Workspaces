@@ -475,6 +475,9 @@ label {
 .reception {
   width: 31vw;
 }
+#aj{
+  font-size: 3rem;
+}
 
 }
 @media (orientation: portrait) {
