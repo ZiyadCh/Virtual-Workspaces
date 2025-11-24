@@ -1,5 +1,4 @@
 const reset = document.getElementById("resetBtn");
-const chGrid = document.getElementsByClassName("chGrid");
 //
 const addNew = document.getElementById("addNew");
 const cardContainer = document.querySelector(".cardContainer");

@@ -119,6 +119,9 @@ body {
   transform: scale(0.8);
   width: 100%;
 }
+.gGrid .staffCard:hover{
+  z-index: 5;
+}
 
 .sidebar {
   overflow-y: scroll;
