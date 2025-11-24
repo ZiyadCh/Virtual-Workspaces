@@ -1,6 +1,5 @@
 const reset = document.getElementById("resetBtn");
 const chGrid = document.getElementsByClassName("chGrid");
-const roomTitre = document.getElementsByTagName("h1");
 //
 const addNew = document.getElementById("addNew");
 const cardContainer = document.querySelector(".cardContainer");
@@ -89,7 +88,7 @@ if (photoInput.value == "") {
 //**********************
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
-let valid = true;
+  let valid = true;
   const nameRegex = /^[a-zA-Z\s]{2,50}$/;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const phoneRegex = /^\+?\d{7,15}$/;
@@ -100,7 +99,6 @@ let valid = true;
     return;
   }
   if (roleSelect.value == "") {
-    
     alert(" Choisir un role !");
     return;
   }
@@ -113,7 +111,7 @@ let valid = true;
     return;
   }
   if (valid == false) {
-   return; 
+    return;
   }
 
   const experience = Array.from(document.querySelectorAll(".exForm")).map(
@@ -123,16 +121,16 @@ let valid = true;
       const dateE = form.querySelector(".dateE").value;
 
       if (dateS == "" || dateE == "" || tache == "") {
-       alert("Remplire tout les champ") 
+        alert("Remplire tout les champ");
         valid = false;
-       return;
+        return;
       }
       if (new Date(dateS) > new Date(dateE)) {
         alert("la date debut ne peu pas etre apres la dates fin! ");
         valid = false;
         return;
       } else {
-        valid= true;
+        valid = true;
         return {
           tache: tache,
           dateS: dateS,
@@ -158,12 +156,12 @@ let valid = true;
   //
 
   if (valid == true) {
-  staffInfo.push(info);
-  localStorage.setItem("staffInfo", JSON.stringify(staffInfo));
-  //create the card
-  const staffCard = createCard(info);
-  //append
-  cardContainer.appendChild(staffCard);
+    staffInfo.push(info);
+    localStorage.setItem("staffInfo", JSON.stringify(staffInfo));
+    //create the card
+    const staffCard = createCard(info);
+    //append
+    cardContainer.appendChild(staffCard);
   }
 });
 //create
@@ -249,18 +247,10 @@ function assign(room, roleName, roomName, max) {
   function resetPos() {
     cardContainer.innerHTML = "";
     loadCard(staffInfo);
-    //return
-    document
-      .querySelectorAll(
+    document.querySelectorAll(
         ".receptionGrid, .serverGrid, .archiveGrid, .staffGrid, .conferenceGrid, .securityGrid"
       )
       .forEach((grid) => (grid.innerHTML = ""));
-  }
-  function appendCard(e) {
-    e.stopPropagation();
-    room.appendChild(this);
-    this.addEventListener("click", returnCard);
-    checkColor();
   }
   function returnCard(e) {
     e.stopPropagation();

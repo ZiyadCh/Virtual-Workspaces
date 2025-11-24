@@ -116,7 +116,7 @@ body {
   overflow-y: scroll;
 }
 .gGrid .staffCard {
-  transform: scale(0.7);
+  transform: scale(0.8);
   width: 100%;
 }
 
