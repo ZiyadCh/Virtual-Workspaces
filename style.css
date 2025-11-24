@@ -291,11 +291,22 @@ select {
   background: #fff;
   border-radius: 25px;
 }
+
+
 .exp {
   display: grid;
   grid-template-columns: 1fr;
   gap: 10px;
 }
+.delExp{
+  position: absolute;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 1rem;
+  top: 0;
+  right: 0;
+}
+
 /* staff info */
 .modalInfo {
   display: none;
@@ -478,7 +489,20 @@ label {
 #aj{
   font-size: 3rem;
 }
-
+.exForm{
+  gap: 0;
+  width: 20vw;
+}
+.exForm input{
+ transform: scale(0.5); 
+}
+.delExp{
+  width: 3rem;
+  height: 3rem;
+  margin: 1rem;
+  top: 0;
+  right: 0;
+}
 }
 @media (orientation: portrait) {
     .modalCard{

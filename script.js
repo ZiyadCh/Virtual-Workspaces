@@ -61,7 +61,7 @@ addExp.addEventListener("click", () => {
   const delBtn = document.createElement("button");
   delBtn.innerHTML = `
   <img
-    class="delExp w-5 h-5 absolute top-4 right-5"
+    class="delExp "
     src="images/delete.png"
     alt="trash"
   />`;
@@ -74,8 +74,7 @@ addExp.addEventListener("click", () => {
 
   exp.appendChild(exWrap);
 });
-//
-//just the image thing
+//image 
 photoInput.addEventListener("input", () => {
   pfpImg.src = photoInput.value;
 });
