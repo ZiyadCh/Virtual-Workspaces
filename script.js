@@ -34,6 +34,7 @@ const staffGrid = document.querySelector(".staffGrid");
 const conferenceGrid = document.querySelector(".conferenceGrid");
 const securityGrid = document.querySelector(".securityGrid");
 
+
 const staffInfo = JSON.parse(localStorage.getItem("staffInfo")) || [];
 //test teception
 // popup
@@ -113,7 +114,7 @@ submitBtn.addEventListener("click", (e) => {
   }
 
   const experience = Array.from(document.querySelectorAll(".exForm")).map(
-    (form, index) => {
+    (form) => {
       const tache = form.querySelector(".tache").value;
       const dateS = form.querySelector(".dateS").value;
       const dateE = form.querySelector(".dateE").value;
